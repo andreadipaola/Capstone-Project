@@ -16,10 +16,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Guest extends Person {
+
 	private String creditCard;
 	@OneToMany(mappedBy = "guest")
 	private List<Reservation> reservations = new ArrayList<>();
 	@OneToMany(mappedBy = "guest")
 	private List<Review> reviews = new ArrayList<>();
+
+	public Guest(String firstName, String lastName, String email, String password, String phone, String creditCard) {
+		super(firstName, lastName, email, password, phone);
+		this.creditCard = creditCard;
+	}
 
 }

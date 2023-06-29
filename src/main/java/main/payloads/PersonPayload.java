@@ -3,8 +3,12 @@ package main.payloads;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import main.entities.enums.Role;
 
+@Getter
+@Setter
 public abstract class PersonPayload {
 	@NotNull(message = "ATTENZIONE!!! Il campo First Name è obbligatorio")
 	private String fistName;

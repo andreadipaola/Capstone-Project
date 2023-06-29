@@ -2,16 +2,20 @@ package main.entities;
 
 import java.util.UUID;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main.entities.enums.Role;
 
+@MappedSuperclass
 @Getter
 @Setter
-@MappedSuperclass
+@NoArgsConstructor
 public abstract class Person {
 	@Id
 	@GeneratedValue
@@ -21,5 +25,15 @@ public abstract class Person {
 	private String email;
 	private String password;
 	public String phone;
-	private Role role;
+	@Enumerated(EnumType.STRING)
+	private Role role = Role.GUEST;
+
+	public Person(String fistName, String lastName, String email, String password, String phone) {
+		this.fistName = fistName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+	}
+
 }
