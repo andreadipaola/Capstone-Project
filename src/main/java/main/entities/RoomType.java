@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +22,7 @@ import lombok.Setter;
 public class RoomType {
 	@Id
 	@GeneratedValue
+	@Column(name = "room_type_id")
 	private UUID roomTypeId;
 	private String name;
 	private String initials;
