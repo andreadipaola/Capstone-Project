@@ -1,10 +1,10 @@
 package main.runners;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
@@ -12,6 +12,7 @@ import com.github.javafaker.Faker;
 import main.entities.Guest;
 import main.repositories.GuestRepository;
 
+@Order(2)
 @Component
 public class GuestRunner implements CommandLineRunner {
 
@@ -21,9 +22,8 @@ public class GuestRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Faker faker = new Faker(new Locale("it"));
-		List<Guest> users = guestRepository.findAll();
 
-		if (users.size() == 0) {
+		if (guestRepository.count() == 0) {
 			for (int i = 0; i < 10; i++) {
 				try {
 					String firstName = faker.name().firstName();
@@ -40,6 +40,8 @@ public class GuestRunner implements CommandLineRunner {
 				}
 			}
 
+		} else {
+			System.out.println("In questa struttura ci sono " + guestRepository.count() + " ospiti");
 		}
 	}
 

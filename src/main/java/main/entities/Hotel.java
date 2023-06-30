@@ -39,4 +39,10 @@ public class Hotel {
 	@OneToMany(mappedBy = "hotel")
 	private List<Receptionist> receptionist = new ArrayList<>();
 
+	public Hotel(String name, String address) {
+		super();
+		this.name = name;
+		this.address = address;
+	}
+
 }
