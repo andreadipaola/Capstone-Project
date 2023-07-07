@@ -53,7 +53,7 @@ public class ManagerRunner implements CommandLineRunner {
 
 					Manager manager = new Manager(gender, firstName, lastName, language, dateOfBirth, countryOfBirth,
 							cityOfBirth, countryOfResidence, cityOfResidence, citizenship, documentType, documentNumber,
-							email, password, phone);
+							email, password, phone, null);
 					managerRepository.save(manager);
 				} catch (Exception ex) {
 					System.out.println(ex);

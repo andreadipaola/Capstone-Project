@@ -24,15 +24,6 @@ public class Owner extends Person {
 
 	public Owner(Gender gender, String fistName, String lastName, String language, LocalDate dateOfBirth,
 			String countryOfBirth, String cityOfBirth, String countryOfResidence, String cityOfResidence,
-			String citizenship, String documentType, String documentNumber, String email, String password,
-			String phone) {
-		super(gender, fistName, lastName, language, dateOfBirth, countryOfBirth, cityOfBirth, countryOfResidence,
-				cityOfResidence, citizenship, documentType, documentNumber, email, password, phone);
-		this.setRole(Role.OWNER);
-	}
-
-	public Owner(Gender gender, String fistName, String lastName, String language, LocalDate dateOfBirth,
-			String countryOfBirth, String cityOfBirth, String countryOfResidence, String cityOfResidence,
 			String citizenship, String documentType, String documentNumber, String email, String password, String phone,
 			List<Hotel> hotels) {
 		super(gender, fistName, lastName, language, dateOfBirth, countryOfBirth, cityOfBirth, countryOfResidence,

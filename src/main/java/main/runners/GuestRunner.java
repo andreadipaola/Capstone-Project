@@ -57,7 +57,7 @@ public class GuestRunner implements CommandLineRunner {
 
 					Guest guest = new Guest(gender, firstName, lastName, language, dateOfBirth, countryOfBirth,
 							cityOfBirth, countryOfResidence, cityOfResidence, citizenship, documentType, documentNumber,
-							email, password, phone, note, foodIntolerance, creditCard, reasonOfTheTrip);
+							email, password, phone, note, foodIntolerance, creditCard, reasonOfTheTrip, null);
 					guestRepository.save(guest);
 				} catch (Exception ex) {
 					System.out.println(ex);

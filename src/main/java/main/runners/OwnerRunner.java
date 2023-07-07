@@ -11,7 +11,7 @@ import main.entities.Owner;
 import main.entities.enums.Gender;
 import main.repositories.OwnerRepository;
 
-@Order(2)
+@Order(1)
 @Component
 public class OwnerRunner implements CommandLineRunner {
 
@@ -25,7 +25,7 @@ public class OwnerRunner implements CommandLineRunner {
 
 			Owner owner = new Owner(Gender.MAN, "Andrea", "Di Paola", "IT", LocalDate.of(1986, 02, 15), "Italia",
 					"Roma", "Italia", "Roma", "italiana", "Passaporto", "AA999ZZ", "andr3a.dipaola@gmail.com", "1234",
-					"333321654");
+					"333321654", null);
 			ownerRepository.save(owner);
 			System.out.println("La catena è posseduta da " + ownerRepository.count() + " proprietario");
 		} else {

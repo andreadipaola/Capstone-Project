@@ -35,7 +35,7 @@ public class GuestService {
 				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
 				body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(), body.getDocumentNumber(),
 				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
-				body.getCreditCard(), body.getReasonOfTheTrip());
+				body.getCreditCard(), body.getReasonOfTheTrip(), null);
 		return guestRepository.save(guest);
 	}
 

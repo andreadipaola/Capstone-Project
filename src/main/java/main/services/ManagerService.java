@@ -34,7 +34,7 @@ public class ManagerService {
 		Manager manager = new Manager(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
 				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
 				body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(), body.getDocumentNumber(),
-				body.getEmail(), body.getPassword(), body.getPhone());
+				body.getEmail(), body.getPassword(), body.getPhone(), null);
 		return managerRepository.save(manager);
 	}
 

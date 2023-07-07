@@ -29,19 +29,6 @@ public class Guest extends Person {
 	public Guest(Gender gender, String firstName, String lastName, String language, LocalDate dateOfBirth,
 			String countryOfBirth, String cityOfBirth, String countryOfResidence, String cityOfResidence,
 			String citizenship, String documentType, String documentNumber, String email, String password, String phone,
-			String note, String foodIntolerance, String creditCard, String reasonOfTheTrip) {
-		super(gender, firstName, lastName, language, dateOfBirth, countryOfBirth, cityOfBirth, countryOfResidence,
-				cityOfResidence, citizenship, documentType, documentNumber, email, password, phone);
-		this.note = note;
-		this.foodIntolerance = foodIntolerance;
-		this.creditCard = creditCard;
-		this.reasonOfTheTrip = reasonOfTheTrip;
-		this.setRole(Role.GUEST);
-	}
-
-	public Guest(Gender gender, String firstName, String lastName, String language, LocalDate dateOfBirth,
-			String countryOfBirth, String cityOfBirth, String countryOfResidence, String cityOfResidence,
-			String citizenship, String documentType, String documentNumber, String email, String password, String phone,
 			String note, String foodIntolerance, String creditCard, String reasonOfTheTrip,
 			List<Reservation> reservations) {
 		super(gender, firstName, lastName, language, dateOfBirth, countryOfBirth, cityOfBirth, countryOfResidence,
