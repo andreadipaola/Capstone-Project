@@ -1,5 +1,6 @@
 package main.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import main.entities.enums.Gender;
+import main.entities.enums.Role;
 
 @Entity
 @Table(name = "guests")
@@ -16,16 +19,39 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Guest extends Person {
-
+	private String note;
+	private String foodIntolerance;
 	private String creditCard;
+	private String reasonOfTheTrip;
 	@OneToMany(mappedBy = "guest")
 	private List<Reservation> reservations = new ArrayList<>();
-	@OneToMany(mappedBy = "guest")
-	private List<Review> reviews = new ArrayList<>();
 
-	public Guest(String firstName, String lastName, String email, String password, String phone, String creditCard) {
-		super(firstName, lastName, email, password, phone);
+	public Guest(Gender gender, String firstName, String lastName, String language, LocalDate dateOfBirth,
+			String countryOfBirth, String cityOfBirth, String countryOfResidence, String cityOfResidence,
+			String citizenship, String documentType, String documentNumber, String email, String password, String phone,
+			String note, String foodIntolerance, String creditCard, String reasonOfTheTrip) {
+		super(gender, firstName, lastName, language, dateOfBirth, countryOfBirth, cityOfBirth, countryOfResidence,
+				cityOfResidence, citizenship, documentType, documentNumber, email, password, phone);
+		this.note = note;
+		this.foodIntolerance = foodIntolerance;
 		this.creditCard = creditCard;
+		this.reasonOfTheTrip = reasonOfTheTrip;
+		this.setRole(Role.GUEST);
+	}
+
+	public Guest(Gender gender, String firstName, String lastName, String language, LocalDate dateOfBirth,
+			String countryOfBirth, String cityOfBirth, String countryOfResidence, String cityOfResidence,
+			String citizenship, String documentType, String documentNumber, String email, String password, String phone,
+			String note, String foodIntolerance, String creditCard, String reasonOfTheTrip,
+			List<Reservation> reservations) {
+		super(gender, firstName, lastName, language, dateOfBirth, countryOfBirth, cityOfBirth, countryOfResidence,
+				cityOfResidence, citizenship, documentType, documentNumber, email, password, phone);
+		this.note = note;
+		this.foodIntolerance = foodIntolerance;
+		this.creditCard = creditCard;
+		this.reasonOfTheTrip = reasonOfTheTrip;
+		this.reservations = reservations;
+		this.setRole(Role.GUEST);
 	}
 
 }

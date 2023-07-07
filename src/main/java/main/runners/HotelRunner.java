@@ -40,7 +40,7 @@ public class HotelRunner implements CommandLineRunner {
 					System.out.println(ex);
 				}
 			}
-
+			System.out.println("La catena comprende " + hotelRepository.count() + " strutture");
 		} else {
 			System.out.println("La catena comprende " + hotelRepository.count() + " strutture");
 		}

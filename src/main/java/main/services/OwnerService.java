@@ -9,43 +9,42 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import main.entities.Guest;
+import main.entities.Owner;
 import main.exceptions.NotFoundException;
-import main.payloads.GuestPayload;
-import main.repositories.GuestRepository;
+import main.payloads.OwnerPayload;
+import main.repositories.OwnerRepository;
 
 @Service
-public class GuestService {
+public class OwnerService {
 
 	@Autowired
-	private GuestRepository guestRepository;
+	private OwnerRepository ownerRepository;
 
-	public Page<Guest> find(int page, int size, String sortBy) {
+	public Page<Owner> find(int page, int size, String sortBy) {
 		if (size < 0)
 			size = 10;
 		if (size > 100)
 			size = 100;
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 
-		return guestRepository.findAll(pageable);
+		return ownerRepository.findAll(pageable);
 	}
 
-	public Guest create(GuestPayload body) {
-		Guest guest = new Guest(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
+	public Owner create(OwnerPayload body) {
+		Owner owner = new Owner(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
 				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
 				body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(), body.getDocumentNumber(),
-				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
-				body.getCreditCard(), body.getReasonOfTheTrip());
-		return guestRepository.save(guest);
+				body.getEmail(), body.getPassword(), body.getPhone());
+		return ownerRepository.save(owner);
 	}
 
-	public Guest findById(UUID id) throws NotFoundException {
-		return guestRepository.findById(id)
+	public Owner findById(UUID id) throws NotFoundException {
+		return ownerRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
 	}
 
-	public Guest findByIdAndUpdate(UUID id, GuestPayload body) throws NotFoundException {
-		Guest found = this.findById(id);
+	public Owner findByIdAndUpdate(UUID id, OwnerPayload body) throws NotFoundException {
+		Owner found = this.findById(id);
 
 		found.setPersonId(id);
 		found.setGender(body.getGender());
@@ -63,17 +62,13 @@ public class GuestService {
 		found.setEmail(body.getEmail());
 		found.setPassword(body.getPassword());
 		found.setPhone(body.getPhone());
-		found.setNote(body.getNote());
-		found.setFoodIntolerance(body.getFoodIntolerance());
-		found.setCreditCard(body.getCreditCard());
-		found.setReasonOfTheTrip(body.getReasonOfTheTrip());
 
-		return guestRepository.save(found);
+		return ownerRepository.save(found);
 	}
 
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
-		Guest found = this.findById(id);
-		guestRepository.delete(found);
+		Owner found = this.findById(id);
+		ownerRepository.delete(found);
 	}
 
 }

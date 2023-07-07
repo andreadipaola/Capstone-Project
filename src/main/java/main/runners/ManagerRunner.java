@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
-import main.entities.Guest;
+import main.entities.Manager;
 import main.entities.enums.Gender;
-import main.repositories.GuestRepository;
+import main.repositories.ManagerRepository;
 
-@Order(5)
+@Order(3)
 @Component
-public class GuestRunner implements CommandLineRunner {
+public class ManagerRunner implements CommandLineRunner {
 
 	@Autowired
-	GuestRepository guestRepository;
+	ManagerRepository managerRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -30,7 +30,7 @@ public class GuestRunner implements CommandLineRunner {
 		LocalDate minDate = LocalDate.of(1923, 1, 1);
 		LocalDate maxDate = LocalDate.of(2005, 12, 31);
 
-		if (guestRepository.count() == 0) {
+		if (managerRepository.count() == 0) {
 			for (int i = 0; i < 10; i++) {
 				try {
 					Gender gender = getRandomEnumValue(Gender.class);
@@ -50,23 +50,18 @@ public class GuestRunner implements CommandLineRunner {
 					String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@google.com";
 					String password = "1234";
 					String phone = faker.phoneNumber().cellPhone();
-					String creditCard = faker.finance().creditCard();
-					String reasonOfTheTrip = faker.chuckNorris().fact();
-					String note = null;
-					String foodIntolerance = null;
 
-					Guest guest = new Guest(gender, firstName, lastName, language, dateOfBirth, countryOfBirth,
+					Manager manager = new Manager(gender, firstName, lastName, language, dateOfBirth, countryOfBirth,
 							cityOfBirth, countryOfResidence, cityOfResidence, citizenship, documentType, documentNumber,
-							email, password, phone, note, foodIntolerance, creditCard, reasonOfTheTrip);
-					guestRepository.save(guest);
+							email, password, phone);
+					managerRepository.save(manager);
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}
 			}
-			System.out.println("Nella struttura alloggiano " + guestRepository.count() + " ospiti");
-
+			System.out.println("Nella catena lavorano " + managerRepository.count() + " manager");
 		} else {
-			System.out.println("Nella struttura alloggiano " + guestRepository.count() + " ospiti");
+			System.out.println("Nella catena lavorano " + managerRepository.count() + " manager");
 		}
 	}
 

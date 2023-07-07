@@ -40,23 +40,23 @@ public class GuestController {
 		return guestService.create(body);
 	}
 
-	@GetMapping("/{guestId}")
-	public Guest getGuest(@PathVariable UUID guestId) throws Exception {
-		return guestService.findById(guestId);
+	@GetMapping("/{id}")
+	public Guest getGuest(@PathVariable UUID id) throws Exception {
+		return guestService.findById(id);
 	}
 
-	@PutMapping("/{gestId}")
-	public Guest updateGuest(@PathVariable UUID gestId, @RequestBody @Validated GuestPayload body) throws Exception {
+	@PutMapping("/{id}")
+	public Guest updateGuest(@PathVariable UUID id, @RequestBody @Validated GuestPayload body) throws Exception {
 //		if (gestId == null) {
 //			throw new IllegalArgumentException("L'ID dell' ospite non può essere nullo");
 //		}
-		return guestService.findByIdAndUpdate(gestId, body);
+		return guestService.findByIdAndUpdate(id, body);
 	}
 
-	@DeleteMapping("/{gestId}")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteGuest(@PathVariable UUID gestId) throws Exception {
-		guestService.findByIdAndDelete(gestId);
+	public void deleteGuest(@PathVariable UUID id) throws Exception {
+		guestService.findByIdAndDelete(id);
 	}
 
 }

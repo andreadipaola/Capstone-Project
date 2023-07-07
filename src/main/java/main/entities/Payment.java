@@ -33,4 +33,11 @@ public class Payment {
 	@OneToOne
 	@JoinColumn(name = "invoice_id")
 	private Invoice invoice;
+
+	public Payment(PaymentStatus paymentStatus, LocalDateTime paymentDateTime) {
+		super();
+		this.paymentStatus = paymentStatus;
+		this.paymentDateTime = paymentDateTime;
+	}
+
 }

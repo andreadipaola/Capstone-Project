@@ -17,43 +17,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.entities.Hotel;
-import main.payloads.HotelPayload;
-import main.services.HotelService;
+import main.entities.Owner;
+import main.payloads.OwnerPayload;
+import main.services.OwnerService;
 
 @RestController
-@RequestMapping("/hotels")
-public class HotelController {
+@RequestMapping("/owners")
+public class OwnerController {
 	@Autowired
-	private HotelService hotelService;
+	private OwnerService ownerService;
 
 	@GetMapping("")
-	public Page<Hotel> getAllHotels(@RequestParam(defaultValue = "0") int page,
+	public Page<Owner> getAllOwners(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "lastName") String sortBy)
 			throws Exception {
-		return hotelService.find(page, size, sortBy);
+		return ownerService.find(page, size, sortBy);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Hotel saveHotel(@RequestBody @Validated HotelPayload body) throws Exception {
-		return hotelService.create(body);
+	public Owner saveOwner(@RequestBody @Validated OwnerPayload body) throws Exception {
+		return ownerService.create(body);
 	}
 
 	@GetMapping("/{id}")
-	public Hotel getHotel(@PathVariable UUID id) throws Exception {
-		return hotelService.findById(id);
+	public Owner getOwner(@PathVariable UUID id) throws Exception {
+		return ownerService.findById(id);
 	}
 
 	@PutMapping("/{id}")
-	public Hotel updateHotel(@PathVariable UUID id, @RequestBody @Validated HotelPayload body) throws Exception {
-		return hotelService.findByIdAndUpdate(id, body);
+	public Owner updateOwner(@PathVariable UUID id, @RequestBody @Validated OwnerPayload body) throws Exception {
+		return ownerService.findByIdAndUpdate(id, body);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteHotel(@PathVariable UUID id) throws Exception {
-		hotelService.findByIdAndDelete(id);
+	public void deleteOwner(@PathVariable UUID id) throws Exception {
+		ownerService.findByIdAndDelete(id);
 	}
 
 }

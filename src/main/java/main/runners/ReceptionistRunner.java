@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
-import main.entities.Guest;
+import main.entities.Receptionist;
 import main.entities.enums.Gender;
-import main.repositories.GuestRepository;
+import main.repositories.ReceptionistRepository;
 
-@Order(5)
+@Order(4)
 @Component
-public class GuestRunner implements CommandLineRunner {
+public class ReceptionistRunner implements CommandLineRunner {
 
 	@Autowired
-	GuestRepository guestRepository;
+	ReceptionistRepository receptionistRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -30,8 +30,8 @@ public class GuestRunner implements CommandLineRunner {
 		LocalDate minDate = LocalDate.of(1923, 1, 1);
 		LocalDate maxDate = LocalDate.of(2005, 12, 31);
 
-		if (guestRepository.count() == 0) {
-			for (int i = 0; i < 10; i++) {
+		if (receptionistRepository.count() == 0) {
+			for (int i = 0; i < 25; i++) {
 				try {
 					Gender gender = getRandomEnumValue(Gender.class);
 					String firstName = faker.name().firstName();
@@ -50,23 +50,18 @@ public class GuestRunner implements CommandLineRunner {
 					String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@google.com";
 					String password = "1234";
 					String phone = faker.phoneNumber().cellPhone();
-					String creditCard = faker.finance().creditCard();
-					String reasonOfTheTrip = faker.chuckNorris().fact();
-					String note = null;
-					String foodIntolerance = null;
 
-					Guest guest = new Guest(gender, firstName, lastName, language, dateOfBirth, countryOfBirth,
-							cityOfBirth, countryOfResidence, cityOfResidence, citizenship, documentType, documentNumber,
-							email, password, phone, note, foodIntolerance, creditCard, reasonOfTheTrip);
-					guestRepository.save(guest);
+					Receptionist receptionist = new Receptionist(gender, firstName, lastName, language, dateOfBirth,
+							countryOfBirth, cityOfBirth, countryOfResidence, cityOfResidence, citizenship, documentType,
+							documentNumber, email, password, phone);
+					receptionistRepository.save(receptionist);
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}
 			}
-			System.out.println("Nella struttura alloggiano " + guestRepository.count() + " ospiti");
-
+			System.out.println("Nella catena lavorano " + receptionistRepository.count() + " receptionist");
 		} else {
-			System.out.println("Nella struttura alloggiano " + guestRepository.count() + " ospiti");
+			System.out.println("Nella catena lavorano " + receptionistRepository.count() + " receptionist");
 		}
 	}
 

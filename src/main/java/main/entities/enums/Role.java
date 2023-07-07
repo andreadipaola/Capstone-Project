@@ -1,5 +1,5 @@
 package main.entities.enums;
 
 public enum Role {
-	ADMIN, USER, GUEST
+	OWNER, MANAGER, RECEPTIONIST, GUEST
 }

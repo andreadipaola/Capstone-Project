@@ -9,43 +9,42 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import main.entities.Guest;
+import main.entities.Receptionist;
 import main.exceptions.NotFoundException;
-import main.payloads.GuestPayload;
-import main.repositories.GuestRepository;
+import main.payloads.ReceptionistPayload;
+import main.repositories.ReceptionistRepository;
 
 @Service
-public class GuestService {
+public class ReceptionistService {
 
 	@Autowired
-	private GuestRepository guestRepository;
+	private ReceptionistRepository receptionistRepository;
 
-	public Page<Guest> find(int page, int size, String sortBy) {
+	public Page<Receptionist> find(int page, int size, String sortBy) {
 		if (size < 0)
 			size = 10;
 		if (size > 100)
 			size = 100;
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 
-		return guestRepository.findAll(pageable);
+		return receptionistRepository.findAll(pageable);
 	}
 
-	public Guest create(GuestPayload body) {
-		Guest guest = new Guest(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
-				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
-				body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(), body.getDocumentNumber(),
-				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
-				body.getCreditCard(), body.getReasonOfTheTrip());
-		return guestRepository.save(guest);
+	public Receptionist create(ReceptionistPayload body) {
+		Receptionist receptionist = new Receptionist(body.getGender(), body.getFirstName(), body.getLastName(),
+				body.getLanguage(), body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(),
+				body.getCountryOfResidence(), body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(),
+				body.getDocumentNumber(), body.getEmail(), body.getPassword(), body.getPhone());
+		return receptionistRepository.save(receptionist);
 	}
 
-	public Guest findById(UUID id) throws NotFoundException {
-		return guestRepository.findById(id)
+	public Receptionist findById(UUID id) throws NotFoundException {
+		return receptionistRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
 	}
 
-	public Guest findByIdAndUpdate(UUID id, GuestPayload body) throws NotFoundException {
-		Guest found = this.findById(id);
+	public Receptionist findByIdAndUpdate(UUID id, ReceptionistPayload body) throws NotFoundException {
+		Receptionist found = this.findById(id);
 
 		found.setPersonId(id);
 		found.setGender(body.getGender());
@@ -63,17 +62,13 @@ public class GuestService {
 		found.setEmail(body.getEmail());
 		found.setPassword(body.getPassword());
 		found.setPhone(body.getPhone());
-		found.setNote(body.getNote());
-		found.setFoodIntolerance(body.getFoodIntolerance());
-		found.setCreditCard(body.getCreditCard());
-		found.setReasonOfTheTrip(body.getReasonOfTheTrip());
 
-		return guestRepository.save(found);
+		return receptionistRepository.save(found);
 	}
 
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
-		Guest found = this.findById(id);
-		guestRepository.delete(found);
+		Receptionist found = this.findById(id);
+		receptionistRepository.delete(found);
 	}
 
 }

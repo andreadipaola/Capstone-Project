@@ -17,43 +17,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.entities.Hotel;
-import main.payloads.HotelPayload;
-import main.services.HotelService;
+import main.entities.Manager;
+import main.payloads.ManagerPayload;
+import main.services.ManagerService;
 
 @RestController
-@RequestMapping("/hotels")
-public class HotelController {
+@RequestMapping("/managers")
+public class ManagerController {
 	@Autowired
-	private HotelService hotelService;
+	private ManagerService managerService;
 
 	@GetMapping("")
-	public Page<Hotel> getAllHotels(@RequestParam(defaultValue = "0") int page,
+	public Page<Manager> getAllManagers(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "lastName") String sortBy)
 			throws Exception {
-		return hotelService.find(page, size, sortBy);
+		return managerService.find(page, size, sortBy);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Hotel saveHotel(@RequestBody @Validated HotelPayload body) throws Exception {
-		return hotelService.create(body);
+	public Manager saveManager(@RequestBody @Validated ManagerPayload body) throws Exception {
+		return managerService.create(body);
 	}
 
 	@GetMapping("/{id}")
-	public Hotel getHotel(@PathVariable UUID id) throws Exception {
-		return hotelService.findById(id);
+	public Manager getManager(@PathVariable UUID id) throws Exception {
+		return managerService.findById(id);
 	}
 
 	@PutMapping("/{id}")
-	public Hotel updateHotel(@PathVariable UUID id, @RequestBody @Validated HotelPayload body) throws Exception {
-		return hotelService.findByIdAndUpdate(id, body);
+	public Manager updateManager(@PathVariable UUID id, @RequestBody @Validated ManagerPayload body) throws Exception {
+		return managerService.findByIdAndUpdate(id, body);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteHotel(@PathVariable UUID id) throws Exception {
-		hotelService.findByIdAndDelete(id);
+	public void deleteManager(@PathVariable UUID id) throws Exception {
+		managerService.findByIdAndDelete(id);
 	}
 
 }

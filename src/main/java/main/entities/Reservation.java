@@ -47,8 +47,6 @@ public class Reservation {
 	@OneToMany(mappedBy = "reservation")
 	private List<Room> rooms = new ArrayList<>();
 	@OneToOne(mappedBy = "reservation")
-	private Review review;
-	@OneToOne(mappedBy = "reservation")
 	private Invoice invoice;
 
 }

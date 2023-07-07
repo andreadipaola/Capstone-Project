@@ -1,5 +1,6 @@
 package main.entities;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -37,11 +38,34 @@ public class Room {
 	@ManyToOne
 	@JoinColumn(name = "room_type_id")
 	private RoomType roomType;
+	@Column(name = "date_added")
+	private LocalDate dateAdded;
 	@ManyToOne
 	@JoinColumn(name = "hotel_id")
 	private Hotel hotel;
 	@ManyToOne
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;
+
+	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType) {
+		this.roomNumber = roomNumber;
+		this.floor = floor;
+		this.roomStatus = roomStatus;
+		this.isSmoking = isSmoking;
+		this.roomType = roomType;
+		this.dateAdded = LocalDate.now();
+	}
+
+	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType,
+			Hotel hotel, Reservation reservation) {
+		this.roomNumber = roomNumber;
+		this.floor = floor;
+		this.roomStatus = roomStatus;
+		this.isSmoking = isSmoking;
+		this.roomType = roomType;
+		this.dateAdded = LocalDate.now();
+		this.hotel = hotel;
+		this.reservation = reservation;
+	}
 
 }

@@ -29,4 +29,9 @@ public class Invoice {
 	private Reservation reservation;
 	@OneToOne(mappedBy = "invoice")
 	private Payment payment;
+
+	public Invoice(double total) {
+		this.total = total;
+	}
+
 }
