@@ -12,7 +12,7 @@ import main.entities.Payment;
 import main.entities.enums.PaymentStatus;
 import main.repositories.PaymentRepository;
 
-@Order(7)
+@Order(8)
 @Component
 public class PaymentRunner implements CommandLineRunner {
 

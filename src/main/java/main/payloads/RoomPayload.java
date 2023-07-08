@@ -3,7 +3,6 @@ package main.payloads;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import main.entities.RoomType;
 import main.entities.enums.RoomStatus;
 
 @Getter
@@ -17,6 +16,4 @@ public class RoomPayload {
 	private RoomStatus roomStatus;
 	@NotNull(message = "ATTENZIONE!!! Il campo Is Smooking è obbligatorio")
 	private boolean isSmoking;
-	@NotNull(message = "ATTENZIONE!!! Il campo Room Type è obbligatorio")
-	private RoomType roomType;
 }

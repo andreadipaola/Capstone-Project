@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import main.entities.RoomType;
 import main.repositories.RoomTypeRepository;
 
-@Order(4)
+@Order(3)
 @Component
 public class RoomTypeRunner implements CommandLineRunner {
 

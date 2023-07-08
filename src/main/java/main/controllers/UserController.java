@@ -17,44 +17,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.entities.Receptionist;
-import main.payloads.ReceptionistPayload;
-import main.services.ReceptionistService;
+import main.entities.User;
+import main.payloads.UserPayload;
+import main.services.UserService;
 
 @RestController
-@RequestMapping("/receptionists")
-public class ReceptionistController {
+@RequestMapping("/users")
+public class UserController {
 	@Autowired
-	private ReceptionistService receptionistService;
+	private UserService userService;
 
 	@GetMapping("")
-	public Page<Receptionist> getAllReceptionists(@RequestParam(defaultValue = "0") int page,
+	public Page<User> getAllUsers(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "lastName") String sortBy)
 			throws Exception {
-		return receptionistService.find(page, size, sortBy);
+		return userService.find(page, size, sortBy);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Receptionist saveReceptionist(@RequestBody @Validated ReceptionistPayload body) throws Exception {
-		return receptionistService.create(body);
+	public User saveUser(@RequestBody @Validated UserPayload body) throws Exception {
+		return userService.create(body);
 	}
 
 	@GetMapping("/{id}")
-	public Receptionist getReceptionist(@PathVariable UUID id) throws Exception {
-		return receptionistService.findById(id);
+	public User getUser(@PathVariable UUID id) throws Exception {
+		return userService.findById(id);
 	}
 
 	@PutMapping("/{id}")
-	public Receptionist updateReceptionist(@PathVariable UUID id, @RequestBody @Validated ReceptionistPayload body)
-			throws Exception {
-		return receptionistService.findByIdAndUpdate(id, body);
+	public User updateUser(@PathVariable UUID id, @RequestBody @Validated UserPayload body) throws Exception {
+		return userService.findByIdAndUpdate(id, body);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteReceptionist(@PathVariable UUID id) throws Exception {
-		receptionistService.findByIdAndDelete(id);
+	public void deleteUser(@PathVariable UUID id) throws Exception {
+		userService.findByIdAndDelete(id);
 	}
 
 }

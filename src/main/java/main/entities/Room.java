@@ -41,21 +41,17 @@ public class Room {
 	@Column(name = "date_added")
 	private LocalDate dateAdded;
 	@ManyToOne
-	@JoinColumn(name = "hotel_id")
-	private Hotel hotel;
-	@ManyToOne
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;
 
 	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType,
-			Hotel hotel, Reservation reservation) {
+			Reservation reservation) {
 		this.roomNumber = roomNumber;
 		this.floor = floor;
 		this.roomStatus = roomStatus;
 		this.isSmoking = isSmoking;
 		this.roomType = roomType;
 		this.dateAdded = LocalDate.now();
-		this.hotel = hotel;
 		this.reservation = reservation;
 	}
 

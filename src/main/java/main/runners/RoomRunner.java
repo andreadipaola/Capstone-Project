@@ -49,12 +49,14 @@ public class RoomRunner implements CommandLineRunner {
 					String roomNumber = floor + formattedRandomRoomNumber;
 					RoomStatus roomStatus = getRandomEnumValue(RoomStatus.class);
 					boolean isSmoking = random.nextBoolean();
+
 					int randomRoomTypesIndex = random.nextInt(roomTypes.size());
 					RoomType roomType = roomTypes.get(randomRoomTypesIndex);
+
 					Date randomDateAdded = faker.date().between(convertToDate(minDate), convertToDate(maxDate));
 					LocalDate dateAdded = randomDateAdded.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-					Room room = new Room(roomNumber, floor, roomStatus, isSmoking, roomType, null, null);
+					Room room = new Room(roomNumber, floor, roomStatus, isSmoking, roomType, null);
 					room.setDateAdded(dateAdded);
 
 					roomRepository.save(room);

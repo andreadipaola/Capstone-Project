@@ -47,7 +47,7 @@ public class GuestService {
 	public Guest findByIdAndUpdate(UUID id, GuestPayload body) throws NotFoundException {
 		Guest found = this.findById(id);
 
-		found.setPersonId(id);
+		found.setGuestId(id);
 		found.setGender(body.getGender());
 		found.setFirstName(body.getFirstName());
 		found.setLastName(body.getLastName());

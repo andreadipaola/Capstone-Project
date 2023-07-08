@@ -13,16 +13,12 @@ import main.entities.Hotel;
 import main.exceptions.NotFoundException;
 import main.payloads.HotelPayload;
 import main.repositories.HotelRepository;
-import main.repositories.OwnerRepository;
 
 @Service
 public class HotelService {
 
 	@Autowired
 	private HotelRepository hotelRepository;
-
-	@Autowired
-	private OwnerRepository ownerRepository;
 
 	public Page<Hotel> find(int page, int size, String sortBy) {
 		if (size < 0)
@@ -35,10 +31,7 @@ public class HotelService {
 	}
 
 	public Hotel create(HotelPayload body) {
-//		Optional<Owner> optionaOwner = ownerRepository.findByEmail("andr3a.dipaola@gmail.com");
-//		Owner owner = optionaOwner.get();
-		Hotel hotel = new Hotel(body.getName(), body.getAddress(), body.getCity(), body.getCountry(), null, null, null,
-				null);
+		Hotel hotel = new Hotel(body.getName(), body.getAddress(), body.getCity(), body.getCountry());
 		return hotelRepository.save(hotel);
 	}
 

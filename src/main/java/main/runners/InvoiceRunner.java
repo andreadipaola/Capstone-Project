@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import main.entities.Invoice;
 import main.repositories.InvoiceRepository;
 
-@Order(5)
+@Order(7)
 @Component
 public class InvoiceRunner implements CommandLineRunner {
 
