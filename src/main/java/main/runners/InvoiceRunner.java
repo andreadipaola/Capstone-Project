@@ -26,7 +26,7 @@ public class InvoiceRunner implements CommandLineRunner {
 					double randomNumber = ThreadLocalRandom.current().nextDouble(70, 3000);
 					Double total = Math.round(randomNumber * 100.0) / 100.0;
 
-					Invoice invoice = new Invoice(total);
+					Invoice invoice = new Invoice(total, null, null);
 					invoiceRepository.save(invoice);
 				} catch (Exception ex) {
 					System.out.println(ex);

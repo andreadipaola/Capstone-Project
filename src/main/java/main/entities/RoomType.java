@@ -32,13 +32,14 @@ public class RoomType {
 	@OneToMany(mappedBy = "roomType")
 	private List<Room> rooms = new ArrayList<>();
 
-	public RoomType(String name, String initials, String description, double price, int capacity) {
+	public RoomType(String name, String initials, String description, double price, int capacity, List<Room> rooms) {
 		super();
 		this.name = name;
 		this.initials = initials;
 		this.description = description;
 		this.price = price;
 		this.capacity = capacity;
+		this.rooms = rooms;
 	}
 
 }

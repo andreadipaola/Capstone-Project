@@ -47,15 +47,6 @@ public class Room {
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;
 
-	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType) {
-		this.roomNumber = roomNumber;
-		this.floor = floor;
-		this.roomStatus = roomStatus;
-		this.isSmoking = isSmoking;
-		this.roomType = roomType;
-		this.dateAdded = LocalDate.now();
-	}
-
 	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType,
 			Hotel hotel, Reservation reservation) {
 		this.roomNumber = roomNumber;

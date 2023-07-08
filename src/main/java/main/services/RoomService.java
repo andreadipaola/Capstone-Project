@@ -10,20 +10,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import main.entities.Room;
-import main.entities.RoomType;
 import main.exceptions.NotFoundException;
 import main.payloads.RoomPayload;
 import main.repositories.RoomRepository;
-import main.repositories.RoomTypeRepository;
 
 @Service
 public class RoomService {
 
 	@Autowired
 	private RoomRepository roomRepository;
-
-	@Autowired
-	private RoomTypeRepository roomTypeRepository;
 
 	public Page<Room> find(int page, int size, String sortBy) {
 		if (size < 0)
@@ -36,16 +31,14 @@ public class RoomService {
 	}
 
 	public Room create(RoomPayload body) {
-		RoomType roomType = new RoomType(body.getRoomType().getName(), body.getRoomType().getInitials(),
-				body.getRoomType().getDescription(), body.getRoomType().getPrice(), body.getRoomType().getCapacity());
-		roomTypeRepository.save(roomType);
-		Room room = new Room(body.getRoomNumber(), body.getFloor(), body.getRoomStatus(), body.isSmoking(), roomType);
+		Room room = new Room(body.getRoomNumber(), body.getFloor(), body.getRoomStatus(), body.isSmoking(), null, null,
+				null);
 		return roomRepository.save(room);
 	}
 
 	public Room findById(UUID id) throws NotFoundException {
 		return roomRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! La camera cercata non è stata trovata!"));
 	}
 
 	public Room findByIdAndUpdate(UUID id, RoomPayload body) throws NotFoundException {

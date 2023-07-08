@@ -34,13 +34,13 @@ public class ReceptionistService {
 		Receptionist receptionist = new Receptionist(body.getGender(), body.getFirstName(), body.getLastName(),
 				body.getLanguage(), body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(),
 				body.getCountryOfResidence(), body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(),
-				body.getDocumentNumber(), body.getEmail(), body.getPassword(), body.getPhone());
+				body.getDocumentNumber(), body.getEmail(), body.getPassword(), body.getPhone(), null);
 		return receptionistRepository.save(receptionist);
 	}
 
 	public Receptionist findById(UUID id) throws NotFoundException {
 		return receptionistRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! Il receptionist cercato non è stato trovato!"));
 	}
 
 	public Receptionist findByIdAndUpdate(UUID id, ReceptionistPayload body) throws NotFoundException {

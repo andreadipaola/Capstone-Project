@@ -32,13 +32,13 @@ public class RoomTypeService {
 
 	public RoomType create(RoomTypePayload body) {
 		RoomType roomType = new RoomType(body.getName(), body.getInitials(), body.getDescription(), body.getPrice(),
-				body.getCapacity());
+				body.getCapacity(), null);
 		return roomTypeRepository.save(roomType);
 	}
 
 	public RoomType findById(UUID id) throws NotFoundException {
-		return roomTypeRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+		return roomTypeRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("ATTENZIONE!!! Il tipo di camera cercato non è stato trovato!"));
 	}
 
 	public RoomType findByIdAndUpdate(UUID id, RoomTypePayload body) throws NotFoundException {

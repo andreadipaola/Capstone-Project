@@ -29,7 +29,7 @@ public class PaymentRunner implements CommandLineRunner {
 					PaymentStatus paymentStatus = getRandomEnumValue(PaymentStatus.class);
 					LocalDateTime paymentDateTime = generateRandomDateTime(random);
 
-					Payment payment = new Payment(paymentStatus, paymentDateTime);
+					Payment payment = new Payment(paymentStatus, paymentDateTime, null);
 					paymentRepository.save(payment);
 				} catch (Exception ex) {
 					System.out.println(ex);

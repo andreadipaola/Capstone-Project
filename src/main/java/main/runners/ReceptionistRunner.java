@@ -53,7 +53,7 @@ public class ReceptionistRunner implements CommandLineRunner {
 
 					Receptionist receptionist = new Receptionist(gender, firstName, lastName, language, dateOfBirth,
 							countryOfBirth, cityOfBirth, countryOfResidence, cityOfResidence, citizenship, documentType,
-							documentNumber, email, password, phone);
+							documentNumber, email, password, phone, null);
 					receptionistRepository.save(receptionist);
 				} catch (Exception ex) {
 					System.out.println(ex);

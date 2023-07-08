@@ -30,8 +30,10 @@ public class Invoice {
 	@OneToOne(mappedBy = "invoice")
 	private Payment payment;
 
-	public Invoice(double total) {
+	public Invoice(double total, Reservation reservation, Payment payment) {
 		this.total = total;
+		this.reservation = reservation;
+		this.payment = payment;
 	}
 
 }

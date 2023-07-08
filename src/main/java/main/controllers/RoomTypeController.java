@@ -29,7 +29,7 @@ public class RoomTypeController {
 
 	@GetMapping("")
 	public Page<RoomType> getAllRoomTypes(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "lastName") String sortBy)
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "name") String sortBy)
 			throws Exception {
 		return roomTypeService.find(page, size, sortBy);
 	}

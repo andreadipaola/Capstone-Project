@@ -40,7 +40,7 @@ public class OwnerService {
 
 	public Owner findById(UUID id) throws NotFoundException {
 		return ownerRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! Il Proprietario cercato non è stato trovato!"));
 	}
 
 	public Owner findByIdAndUpdate(UUID id, OwnerPayload body) throws NotFoundException {

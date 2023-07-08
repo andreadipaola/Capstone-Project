@@ -19,16 +19,16 @@ public class RoomTypeRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		if (roomTypeRepository.count() == 0) {
-			RoomType singleRoom = new RoomType("Single Room", "SR", "Camera Singola", 80, 2);
+			RoomType singleRoom = new RoomType("Single Room", "SR", "Camera Singola", 80, 2, null);
 			roomTypeRepository.save(singleRoom);
 
-			RoomType doubleRoom = new RoomType("Double Room", "DR", "Camera Doppia", 140, 3);
+			RoomType doubleRoom = new RoomType("Double Room", "DR", "Camera Doppia", 140, 3, null);
 			roomTypeRepository.save(doubleRoom);
 
-			RoomType suite = new RoomType("Suite", "SU", "Suite", 180, 3);
+			RoomType suite = new RoomType("Suite", "SU", "Suite", 180, 3, null);
 			roomTypeRepository.save(suite);
 
-			RoomType deluxe = new RoomType("Deluxe", "DE", "Camera Deluxe", 210, 4);
+			RoomType deluxe = new RoomType("Deluxe", "DE", "Camera Deluxe", 210, 4, null);
 			roomTypeRepository.save(deluxe);
 
 			System.out.println("Nella struttura ci sono " + roomTypeRepository.count() + " tipi di camere");

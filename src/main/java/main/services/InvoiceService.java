@@ -31,13 +31,13 @@ public class InvoiceService {
 	}
 
 	public Invoice create(InvoicePayload body) {
-		Invoice invoice = new Invoice(body.getTotal());
+		Invoice invoice = new Invoice(body.getTotal(), null, null);
 		return invoiceRepository.save(invoice);
 	}
 
 	public Invoice findById(UUID id) throws NotFoundException {
 		return invoiceRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! La fattura cercata non è stata trovata!"));
 	}
 
 	public Invoice findByIdAndUpdate(UUID id, InvoicePayload body) throws NotFoundException {

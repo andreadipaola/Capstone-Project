@@ -17,43 +17,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import main.entities.Payment;
-import main.payloads.PaymentPayload;
-import main.services.PaymentService;
+import main.entities.Reservation;
+import main.payloads.ReservationPayload;
+import main.services.ReservationService;
 
 @RestController
-@RequestMapping("/payments")
-public class PaymentController {
+@RequestMapping("/reservations")
+public class ReservationController {
 	@Autowired
-	private PaymentService paymentService;
+	private ReservationService reservationService;
 
 	@GetMapping("")
-	public Page<Payment> getAllPayments(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "paymentDateTime") String sortBy)
+	public Page<Reservation> getAllReservations(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "arrivalDate") String sortBy)
 			throws Exception {
-		return paymentService.find(page, size, sortBy);
+		return reservationService.find(page, size, sortBy);
 	}
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Payment savePayment(@RequestBody @Validated PaymentPayload body) throws Exception {
-		return paymentService.create(body);
+	public Reservation saveReservation(@RequestBody @Validated ReservationPayload body) throws Exception {
+		return reservationService.create(body);
 	}
 
 	@GetMapping("/{id}")
-	public Payment getPayment(@PathVariable UUID id) throws Exception {
-		return paymentService.findById(id);
+	public Reservation getReservation(@PathVariable UUID id) throws Exception {
+		return reservationService.findById(id);
 	}
 
 	@PutMapping("/{id}")
-	public Payment updatePayment(@PathVariable UUID id, @RequestBody @Validated PaymentPayload body) throws Exception {
-		return paymentService.findByIdAndUpdate(id, body);
+	public Reservation updateReservation(@PathVariable UUID id, @RequestBody @Validated ReservationPayload body)
+			throws Exception {
+		return reservationService.findByIdAndUpdate(id, body);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletePayment(@PathVariable UUID id) throws Exception {
-		paymentService.findByIdAndDelete(id);
+	public void deleteReservation(@PathVariable UUID id) throws Exception {
+		reservationService.findByIdAndDelete(id);
 	}
 
 }

@@ -34,10 +34,10 @@ public class Payment {
 	@JoinColumn(name = "invoice_id")
 	private Invoice invoice;
 
-	public Payment(PaymentStatus paymentStatus, LocalDateTime paymentDateTime) {
-		super();
+	public Payment(PaymentStatus paymentStatus, LocalDateTime paymentDateTime, Invoice invoice) {
 		this.paymentStatus = paymentStatus;
 		this.paymentDateTime = paymentDateTime;
+		this.invoice = invoice;
 	}
 
 }

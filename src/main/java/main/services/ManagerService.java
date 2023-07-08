@@ -40,7 +40,7 @@ public class ManagerService {
 
 	public Manager findById(UUID id) throws NotFoundException {
 		return managerRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! Il manager cercato non è stato trovato!"));
 	}
 
 	public Manager findByIdAndUpdate(UUID id, ManagerPayload body) throws NotFoundException {

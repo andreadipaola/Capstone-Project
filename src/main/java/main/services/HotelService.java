@@ -44,7 +44,7 @@ public class HotelService {
 
 	public Hotel findById(UUID id) throws NotFoundException {
 		return hotelRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! La struttura cercata non è stata trovata!"));
 	}
 
 	public Hotel findByIdAndUpdate(UUID id, HotelPayload body) throws NotFoundException {

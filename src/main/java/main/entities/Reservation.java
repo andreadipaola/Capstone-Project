@@ -49,4 +49,16 @@ public class Reservation {
 	@OneToOne(mappedBy = "reservation")
 	private Invoice invoice;
 
+	public Reservation(LocalDate arrivalDate, LocalDate departureDate, BookingStatus bookingStatus,
+			LocalDateTime checkin, LocalDateTime checkout, Guest guest, List<Room> rooms, Invoice invoice) {
+		this.arrivalDate = arrivalDate;
+		this.departureDate = departureDate;
+		this.bookingStatus = bookingStatus;
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.guest = guest;
+		this.rooms = rooms;
+		this.invoice = invoice;
+	}
+
 }

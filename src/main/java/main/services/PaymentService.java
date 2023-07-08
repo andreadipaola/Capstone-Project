@@ -31,13 +31,13 @@ public class PaymentService {
 	}
 
 	public Payment create(PaymentPayload body) {
-		Payment payment = new Payment(body.getPaymentStatus(), body.getPaymentDateTime());
+		Payment payment = new Payment(body.getPaymentStatus(), body.getPaymentDateTime(), null);
 		return paymentRepository.save(payment);
 	}
 
 	public Payment findById(UUID id) throws NotFoundException {
 		return paymentRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'ospite cercato non è stato trovato!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! Il pagamento cercato non è stato trovato!"));
 	}
 
 	public Payment findByIdAndUpdate(UUID id, PaymentPayload body) throws NotFoundException {
