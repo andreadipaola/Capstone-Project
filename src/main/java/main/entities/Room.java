@@ -35,11 +35,14 @@ public class Room {
 	private RoomStatus roomStatus;
 	@Column(name = "is_smoking")
 	private boolean isSmoking;
+
 	@ManyToOne
 	@JoinColumn(name = "room_type_id")
 	private RoomType roomType;
+
 	@Column(name = "date_added")
 	private LocalDate dateAdded;
+
 	@ManyToOne
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;

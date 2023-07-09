@@ -29,6 +29,7 @@ public class RoomType {
 	private String description;
 	private double price;
 	private int capacity;
+
 	@OneToMany(mappedBy = "roomType")
 	private List<Room> rooms = new ArrayList<>();
 

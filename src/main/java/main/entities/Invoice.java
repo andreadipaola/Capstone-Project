@@ -24,9 +24,11 @@ public class Invoice {
 	@Column(name = "invoice_id")
 	private UUID invoiceId;
 	private double total;
+
 	@OneToOne
 	@JoinColumn(name = "reservarion_id")
 	private Reservation reservation;
+
 	@OneToOne(mappedBy = "invoice")
 	private Payment payment;
 

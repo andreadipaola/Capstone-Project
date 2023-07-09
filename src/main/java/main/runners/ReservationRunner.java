@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -19,13 +18,12 @@ import com.github.javafaker.Faker;
 
 import main.entities.Guest;
 import main.entities.Reservation;
-import main.entities.Room;
 import main.entities.enums.BookingStatus;
 import main.repositories.GuestRepository;
 import main.repositories.ReservationRepository;
 import main.repositories.RoomRepository;
 
-@Order(6)
+@Order(5)
 @Component
 public class ReservationRunner implements CommandLineRunner {
 
@@ -45,7 +43,6 @@ public class ReservationRunner implements CommandLineRunner {
 		LocalDate minDate = LocalDate.of(2022, 1, 1);
 		LocalDate maxDate = LocalDate.now().plusMonths(3);
 		List<Guest> guestsFromDB = guestRepository.findAll();
-		List<Room> roomsFromDB = roomRepository.findAll();
 
 		if (reservationRepository.count() == 0) {
 			for (int i = 0; i < 25; i++) {
@@ -59,20 +56,17 @@ public class ReservationRunner implements CommandLineRunner {
 					LocalDateTime checkin = arrivalDate.atTime(checkinTime);
 					LocalTime checkoutTime = LocalTime.of(10, 0, 0);
 					LocalDateTime checkout = departureDate.atTime(checkoutTime);
-//					int randomGuestsIndex = random.nextInt(guestsFromDB.size());
-//					Guest guest = guestsFromDB.get(randomGuestsIndex);
-//					guestsFromDB.remove(randomGuestsIndex);
+					int randomGuestsIndex = random.nextInt(guestsFromDB.size());
+					Guest guest = guestsFromDB.get(randomGuestsIndex);
 
-					int roomListSize = random.nextInt(3) + 1;
-					List<Room> rooms = new ArrayList<>();
-					for (int j = 0; j < roomListSize && !roomsFromDB.isEmpty(); j++) {
-						int randomIndex = random.nextInt(roomsFromDB.size());
-						Room randomRoom = roomsFromDB.get(randomIndex);
-						rooms.add(randomRoom);
-						roomsFromDB.remove(randomIndex);
-					}
+					// SE DECOMMENTIAMO LA RIGA SOTTOSTANTE E GLI UTENTI GENERATI FOSSERO MENO DELLE
+					// PRENOTAZIONI SI ANDREBBE IN CONTRO ALL'ERRORE OUTOFBOUND QUESTO PERCHE LA
+					// LISTA DEI GUESTS SI VUOTEREBBE E IN QUEL MOMENTO NON AVREMMO PIU GUESTS DA
+					// ASSEGNARE ALLE PRENOTAZIONI
+					// guestsFromDB.remove(randomGuestsIndex);
+
 					Reservation reservation = new Reservation(arrivalDate, departureDate, bookingStatus, checkin,
-							checkout, null, rooms, null);
+							checkout, guest, null, null);
 
 					reservationRepository.save(reservation);
 

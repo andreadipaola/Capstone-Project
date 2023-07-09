@@ -41,11 +41,14 @@ public class Reservation {
 	private BookingStatus bookingStatus;
 	private LocalDateTime checkin;
 	private LocalDateTime checkout;
+
 	@ManyToOne
 	@JoinColumn(name = "guest_id")
 	private Guest guest;
+
 	@OneToMany(mappedBy = "reservation")
 	private List<Room> rooms = new ArrayList<>();
+
 	@OneToOne(mappedBy = "reservation")
 	private Invoice invoice;
 

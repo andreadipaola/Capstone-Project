@@ -17,7 +17,7 @@ import main.entities.Guest;
 import main.entities.enums.Gender;
 import main.repositories.GuestRepository;
 
-@Order(5)
+@Order(4)
 @Component
 public class GuestRunner implements CommandLineRunner {
 
@@ -31,7 +31,7 @@ public class GuestRunner implements CommandLineRunner {
 		LocalDate maxDate = LocalDate.of(2005, 12, 31);
 
 		if (guestRepository.count() == 0) {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 20; i++) {
 				try {
 					Gender gender = getRandomEnumValue(Gender.class);
 					String firstName = faker.name().firstName();
