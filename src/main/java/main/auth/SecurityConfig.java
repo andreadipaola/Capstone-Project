@@ -3,6 +3,7 @@ package main.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,8 +15,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
 	@Autowired
 	JWTAuthFilter jwtAuthFilter;
+
 	@Autowired
 	CorsFilter corsFilter;
 
@@ -25,14 +28,15 @@ public class SecurityConfig {
 		http.csrf(c -> c.disable());
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/guests/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/hotels/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/invoices/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/payments/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/reservations/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/rooms/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/roomtypes/**").authenticated());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/guests/**").hasAuthority("GUEST"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/guests/**").authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/hotels/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/invoices/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/payments/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/reservations/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/rooms/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/roomtypes/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").hasAuthority("MANAGER"));
 		http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
