@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,6 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main.entities.enums.Gender;
+import main.utils.CreditCardConverter;
 
 @Entity
 @Table(name = "guests")
@@ -49,6 +51,7 @@ public class Guest {
 	private String phone;
 	private String note;
 	private String foodIntolerance;
+	@Convert(converter = CreditCardConverter.class)
 	private String creditCard;
 	private String reasonOfTheTrip;
 	@OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
