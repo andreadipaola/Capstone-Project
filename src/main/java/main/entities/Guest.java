@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -25,6 +26,7 @@ import main.entities.enums.Gender;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({ "password", "creditCard" })
 public class Guest {
 	@Id
 	@GeneratedValue

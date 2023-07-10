@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,6 +26,8 @@ import main.entities.enums.Role;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({ "password", "role", "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired",
+		"authorities", "username" })
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
