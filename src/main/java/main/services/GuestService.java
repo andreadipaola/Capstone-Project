@@ -33,7 +33,7 @@ public class GuestService {
 	public Guest create(GuestPayload body) {
 		Guest guest = new Guest(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
 				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
-				body.getCityOfResidence(), body.getCistizenship(), body.getDocumentType(), body.getDocumentNumber(),
+				body.getCityOfResidence(), body.getCitizenship(), body.getDocumentType(), body.getDocumentNumber(),
 				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
 				body.getCreditCard(), body.getReasonOfTheTrip(), null);
 		return guestRepository.save(guest);
@@ -57,7 +57,7 @@ public class GuestService {
 		found.setCityOfBirth(body.getCityOfBirth());
 		found.setCountryOfResidence(body.getCountryOfResidence());
 		found.setCityOfResidence(body.getCityOfResidence());
-		found.setCitizenship(body.getCistizenship());
+		found.setCitizenship(body.getCitizenship());
 		found.setDocumentType(body.getDocumentType());
 		found.setDocumentNumber(body.getDocumentNumber());
 		found.setEmail(body.getEmail());

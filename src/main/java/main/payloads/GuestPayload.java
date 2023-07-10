@@ -31,7 +31,7 @@ public class GuestPayload {
 	@NotNull(message = "ATTENZIONE!!! Il campo City Of Residence è obbligatorio")
 	private String cityOfResidence;
 	@NotNull(message = "ATTENZIONE!!! Il campo Citizenship è obbligatorio")
-	private String cistizenship;
+	private String citizenship;
 	@NotNull(message = "ATTENZIONE!!! Il campo Document Type è obbligatorio")
 	private String documentType;
 	@NotNull(message = "ATTENZIONE!!! Il campo Document Number è obbligatorio")

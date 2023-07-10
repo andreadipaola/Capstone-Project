@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -46,7 +49,8 @@ public class Guest {
 	private String foodIntolerance;
 	private String creditCard;
 	private String reasonOfTheTrip;
-	@OneToMany(mappedBy = "guest")
+	@OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
 	private List<Reservation> reservations = new ArrayList<>();
 
 	public Guest(Gender gender, String firstName, String lastName, String language, LocalDate dateOfBirth,

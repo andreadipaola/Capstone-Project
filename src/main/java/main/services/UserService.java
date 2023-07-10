@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import main.entities.User;
+import main.exceptions.BadRequestException;
 import main.exceptions.NotFoundException;
 import main.payloads.UserPayload;
 import main.repositories.UserRepository;
@@ -31,6 +32,10 @@ public class UserService {
 	}
 
 	public User create(UserPayload body) {
+		userRepository.findByEmail(body.getEmail()).ifPresent(user -> {
+			throw new BadRequestException(
+					"ATTENZIONE!!! L'email con la quale stai cercando di registarti è già in uso da un altro utente");
+		});
 		User user = new User(body.getFirstName(), body.getLastName(), body.getEmail(), body.getPassword(),
 				body.getPhone());
 		return userRepository.save(user);
@@ -57,6 +62,11 @@ public class UserService {
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
 		User found = this.findById(id);
 		userRepository.delete(found);
+	}
+
+	public User findByEmail(String email) throws NotFoundException {
+		return userRepository.findByEmail(email).orElseThrow(
+				() -> new NotFoundException("ATTENZIONE!!! L'email che stai cercando non è stata trovata"));
 	}
 
 }

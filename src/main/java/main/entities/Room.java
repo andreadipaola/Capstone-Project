@@ -3,6 +3,8 @@ package main.entities;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -38,6 +40,7 @@ public class Room {
 
 	@ManyToOne
 	@JoinColumn(name = "room_type_id")
+	@JsonBackReference
 	private RoomType roomType;
 
 	@Column(name = "date_added")
@@ -45,6 +48,7 @@ public class Room {
 
 	@ManyToOne
 	@JoinColumn(name = "reservation_id")
+	@JsonBackReference
 	private Reservation reservation;
 
 	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType,

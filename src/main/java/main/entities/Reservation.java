@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -44,12 +47,15 @@ public class Reservation {
 
 	@ManyToOne
 	@JoinColumn(name = "guest_id")
+	@JsonBackReference
 	private Guest guest;
 
 	@OneToMany(mappedBy = "reservation")
+	@JsonManagedReference
 	private List<Room> rooms = new ArrayList<>();
 
 	@OneToOne(mappedBy = "reservation")
+	@JsonManagedReference
 	private Invoice invoice;
 
 	public Reservation(LocalDate arrivalDate, LocalDate departureDate, BookingStatus bookingStatus,
