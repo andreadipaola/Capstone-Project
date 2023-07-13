@@ -6,9 +6,10 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import main.entities.Owner;
+import main.entities.User;
 
 @Repository
-public interface OwnerRepository extends JpaRepository<Owner, UUID> {
-	Optional<Owner> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, UUID> {
+	Optional<User> findByEmail(String email);
+
 }

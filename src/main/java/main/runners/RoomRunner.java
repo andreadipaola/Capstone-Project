@@ -14,13 +14,15 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
+import main.entities.Reservation;
 import main.entities.Room;
 import main.entities.RoomType;
 import main.entities.enums.RoomStatus;
+import main.repositories.ReservationRepository;
 import main.repositories.RoomRepository;
 import main.repositories.RoomTypeRepository;
 
-@Order(4)
+@Order(6)
 @Component
 public class RoomRunner implements CommandLineRunner {
 
@@ -30,6 +32,9 @@ public class RoomRunner implements CommandLineRunner {
 	@Autowired
 	RoomTypeRepository roomTypeRepository;
 
+	@Autowired
+	ReservationRepository reservationRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Faker faker = new Faker(new Locale("it"));
@@ -37,6 +42,7 @@ public class RoomRunner implements CommandLineRunner {
 		LocalDate minDate = LocalDate.of(1999, 1, 1);
 		LocalDate maxDate = LocalDate.now().minusMonths(1);
 		List<RoomType> roomTypes = roomTypeRepository.findAll();
+		List<Reservation> reservations = reservationRepository.findAll();
 
 		if (roomRepository.count() == 0) {
 			for (int i = 0; i < 25; i++) {
@@ -49,12 +55,17 @@ public class RoomRunner implements CommandLineRunner {
 					String roomNumber = floor + formattedRandomRoomNumber;
 					RoomStatus roomStatus = getRandomEnumValue(RoomStatus.class);
 					boolean isSmoking = random.nextBoolean();
+
 					int randomRoomTypesIndex = random.nextInt(roomTypes.size());
 					RoomType roomType = roomTypes.get(randomRoomTypesIndex);
+
 					Date randomDateAdded = faker.date().between(convertToDate(minDate), convertToDate(maxDate));
 					LocalDate dateAdded = randomDateAdded.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-					Room room = new Room(roomNumber, floor, roomStatus, isSmoking, roomType, null, null);
+					int randomReservationIndex = random.nextInt(reservations.size());
+					Reservation reservation = reservations.get(randomReservationIndex);
+
+					Room room = new Room(roomNumber, floor, roomStatus, isSmoking, roomType, reservation);
 					room.setDateAdded(dateAdded);
 
 					roomRepository.save(room);

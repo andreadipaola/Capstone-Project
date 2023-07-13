@@ -16,16 +16,25 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
+import main.entities.Guest;
 import main.entities.Reservation;
 import main.entities.enums.BookingStatus;
+import main.repositories.GuestRepository;
 import main.repositories.ReservationRepository;
+import main.repositories.RoomRepository;
 
-@Order(4)
+@Order(5)
 @Component
 public class ReservationRunner implements CommandLineRunner {
 
 	@Autowired
 	ReservationRepository reservationRepository;
+
+	@Autowired
+	GuestRepository guestRepository;
+
+	@Autowired
+	RoomRepository roomRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -33,7 +42,7 @@ public class ReservationRunner implements CommandLineRunner {
 		Random random = new Random();
 		LocalDate minDate = LocalDate.of(2022, 1, 1);
 		LocalDate maxDate = LocalDate.now().plusMonths(3);
-		List<Reservation> reservationTypes = reservationRepository.findAll();
+		List<Guest> guestsFromDB = guestRepository.findAll();
 
 		if (reservationRepository.count() == 0) {
 			for (int i = 0; i < 25; i++) {
@@ -47,9 +56,17 @@ public class ReservationRunner implements CommandLineRunner {
 					LocalDateTime checkin = arrivalDate.atTime(checkinTime);
 					LocalTime checkoutTime = LocalTime.of(10, 0, 0);
 					LocalDateTime checkout = departureDate.atTime(checkoutTime);
+					int randomGuestsIndex = random.nextInt(guestsFromDB.size());
+					Guest guest = guestsFromDB.get(randomGuestsIndex);
+
+					// SE DECOMMENTIAMO LA RIGA SOTTOSTANTE E GLI UTENTI GENERATI FOSSERO MENO DELLE
+					// PRENOTAZIONI SI ANDREBBE IN CONTRO ALL'ERRORE OUTOFBOUND QUESTO PERCHE LA
+					// LISTA DEI GUESTS SI VUOTEREBBE E IN QUEL MOMENTO NON AVREMMO PIU GUESTS DA
+					// ASSEGNARE ALLE PRENOTAZIONI
+					// guestsFromDB.remove(randomGuestsIndex);
 
 					Reservation reservation = new Reservation(arrivalDate, departureDate, bookingStatus, checkin,
-							checkout, null, null, null);
+							checkout, guest, null, null);
 
 					reservationRepository.save(reservation);
 

@@ -3,6 +3,8 @@ package main.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,6 +34,7 @@ public class Payment {
 	private LocalDateTime paymentDateTime;
 	@OneToOne
 	@JoinColumn(name = "invoice_id")
+	@JsonBackReference
 	private Invoice invoice;
 
 	public Payment(PaymentStatus paymentStatus, LocalDateTime paymentDateTime, Invoice invoice) {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,11 +31,12 @@ public class RoomType {
 	private String description;
 	private double price;
 	private int capacity;
+
 	@OneToMany(mappedBy = "roomType")
+	@JsonManagedReference
 	private List<Room> rooms = new ArrayList<>();
 
 	public RoomType(String name, String initials, String description, double price, int capacity, List<Room> rooms) {
-		super();
 		this.name = name;
 		this.initials = initials;
 		this.description = description;
