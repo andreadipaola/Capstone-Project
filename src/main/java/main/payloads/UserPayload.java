@@ -15,6 +15,4 @@ public class UserPayload {
 	private String email;
 	@NotNull(message = "ATTENZIONE!!! Il campo Password è obbligatorio")
 	private String password;
-	@NotNull(message = "ATTENZIONE!!! Il campo Phone è obbligatorio")
-	private String phone;
 }

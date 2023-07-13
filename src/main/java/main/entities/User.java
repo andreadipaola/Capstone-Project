@@ -36,16 +36,14 @@ public class User implements UserDetails {
 	private String lastName;
 	private String email;
 	private String password;
-	private String phone;
 	@Enumerated(EnumType.STRING)
 	private Role role = Role.GUEST;
 
-	public User(String firstName, String lastName, String email, String password, String phone) {
+	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.phone = phone;
 	}
 
 	@Override

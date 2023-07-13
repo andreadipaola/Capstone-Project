@@ -36,8 +36,7 @@ public class UserService {
 			throw new BadRequestException(
 					"ATTENZIONE!!! L'email con la quale stai cercando di registarti è già in uso da un altro utente");
 		});
-		User user = new User(body.getFirstName(), body.getLastName(), body.getEmail(), body.getPassword(),
-				body.getPhone());
+		User user = new User(body.getFirstName(), body.getLastName(), body.getEmail(), body.getPassword());
 		return userRepository.save(user);
 	}
 
@@ -54,7 +53,6 @@ public class UserService {
 		found.setLastName(body.getLastName());
 		found.setEmail(body.getEmail());
 		found.setPassword(body.getPassword());
-		found.setPhone(body.getPhone());
 
 		return userRepository.save(found);
 	}

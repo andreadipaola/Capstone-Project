@@ -31,9 +31,8 @@ public class UserRunner implements CommandLineRunner {
 					String lastName = faker.name().lastName();
 					String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@google.com";
 					String password = "1234";
-					String phone = faker.phoneNumber().cellPhone();
 
-					User user = new User(firstName, lastName, email, password, phone);
+					User user = new User(firstName, lastName, email, password);
 					userRepository.save(user);
 				} catch (Exception ex) {
 					System.out.println(ex);
