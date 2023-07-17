@@ -26,12 +26,13 @@ import main.entities.enums.Role;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({ "password", "role", "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired",
+@JsonIgnoreProperties({ "password", "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired",
 		"authorities", "username" })
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
 	private UUID userId;
+	private String avatar;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -39,7 +40,8 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role = Role.GUEST;
 
-	public User(String firstName, String lastName, String email, String password) {
+	public User(String avatar, String firstName, String lastName, String email, String password) {
+		this.avatar = avatar;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

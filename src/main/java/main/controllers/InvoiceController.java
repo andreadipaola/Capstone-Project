@@ -29,7 +29,7 @@ public class InvoiceController {
 
 	@GetMapping("")
 	public Page<Invoice> getAllInvoices(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "total") String sortBy)
+			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "total") String sortBy)
 			throws Exception {
 		return invoiceService.find(page, size, sortBy);
 	}

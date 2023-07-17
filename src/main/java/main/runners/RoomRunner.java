@@ -54,7 +54,6 @@ public class RoomRunner implements CommandLineRunner {
 							: String.format("%02d", randomRoomNumber);
 					String roomNumber = floor + formattedRandomRoomNumber;
 					RoomStatus roomStatus = getRandomEnumValue(RoomStatus.class);
-					boolean isSmoking = random.nextBoolean();
 
 					int randomRoomTypesIndex = random.nextInt(roomTypes.size());
 					RoomType roomType = roomTypes.get(randomRoomTypesIndex);
@@ -65,7 +64,7 @@ public class RoomRunner implements CommandLineRunner {
 					int randomReservationIndex = random.nextInt(reservations.size());
 					Reservation reservation = reservations.get(randomReservationIndex);
 
-					Room room = new Room(roomNumber, floor, roomStatus, isSmoking, roomType, reservation);
+					Room room = new Room(roomNumber, floor, roomStatus, roomType, reservation);
 					room.setDateAdded(dateAdded);
 
 					roomRepository.save(room);

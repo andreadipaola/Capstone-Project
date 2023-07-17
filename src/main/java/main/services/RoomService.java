@@ -31,7 +31,7 @@ public class RoomService {
 	}
 
 	public Room create(RoomPayload body) {
-		Room room = new Room(body.getRoomNumber(), body.getFloor(), body.getRoomStatus(), body.isSmoking(), null, null);
+		Room room = new Room(body.getRoomNumber(), body.getFloor(), body.getRoomStatus(), null, null);
 		return roomRepository.save(room);
 	}
 
@@ -47,7 +47,6 @@ public class RoomService {
 		found.setRoomNumber(body.getRoomNumber());
 		found.setFloor(body.getFloor());
 		found.setRoomStatus(body.getRoomStatus());
-		found.setSmoking(body.isSmoking());
 
 		return roomRepository.save(found);
 	}

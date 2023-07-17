@@ -29,7 +29,7 @@ public class HotelController {
 
 	@GetMapping("")
 	public Page<Hotel> getAllHotels(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "name") String sortBy)
+			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "name") String sortBy)
 			throws Exception {
 		return hotelService.find(page, size, sortBy);
 	}

@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserPayload {
+	private String avatar;
 	@NotNull(message = "ATTENZIONE!!! Il campo First Name è obbligatorio")
 	private String firstName;
 	@NotNull(message = "ATTENZIONE!!! Il campo Last Name è obbligatorio")

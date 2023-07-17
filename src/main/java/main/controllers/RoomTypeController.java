@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +23,15 @@ import main.payloads.RoomTypePayload;
 import main.services.RoomTypeService;
 
 @RestController
-@RequestMapping("/roomtypes")
+@RequestMapping("/roomTypes")
 public class RoomTypeController {
 	@Autowired
 	private RoomTypeService roomTypeService;
 
 	@GetMapping("")
+	@PreAuthorize("hasAuthority('GUEST')")
 	public Page<RoomType> getAllRoomTypes(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "name") String sortBy)
+			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "name") String sortBy)
 			throws Exception {
 		return roomTypeService.find(page, size, sortBy);
 	}

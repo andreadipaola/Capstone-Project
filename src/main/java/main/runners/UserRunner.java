@@ -32,12 +32,15 @@ public class UserRunner implements CommandLineRunner {
 					String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@google.com";
 					String password = "1234";
 
-					User user = new User(firstName, lastName, email, password);
+					User user = new User(null, firstName, lastName, email, password);
 					userRepository.save(user);
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}
 			}
+//			User admin = new User("/assets/avatars/andrea.png", "Andrea", "Di Paola", "andr3a.dipaola@gmail.com",
+//					"123456789");
+//			userRepository.save(admin);
 			System.out.println("Il team della struttura comprende " + userRepository.count() + " user");
 
 		} else {

@@ -29,7 +29,7 @@ public class PaymentController {
 
 	@GetMapping("")
 	public Page<Payment> getAllPayments(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "paymentDateTime") String sortBy)
+			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "paymentDateTime") String sortBy)
 			throws Exception {
 		return paymentService.find(page, size, sortBy);
 	}

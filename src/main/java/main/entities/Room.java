@@ -35,8 +35,6 @@ public class Room {
 	@Column(name = "room_status")
 	@Enumerated(EnumType.STRING)
 	private RoomStatus roomStatus;
-	@Column(name = "is_smoking")
-	private boolean isSmoking;
 
 	@ManyToOne
 	@JoinColumn(name = "room_type_id")
@@ -51,12 +49,10 @@ public class Room {
 	@JsonBackReference
 	private Reservation reservation;
 
-	public Room(String roomNumber, String floor, RoomStatus roomStatus, boolean isSmoking, RoomType roomType,
-			Reservation reservation) {
+	public Room(String roomNumber, String floor, RoomStatus roomStatus, RoomType roomType, Reservation reservation) {
 		this.roomNumber = roomNumber;
 		this.floor = floor;
 		this.roomStatus = roomStatus;
-		this.isSmoking = isSmoking;
 		this.roomType = roomType;
 		this.dateAdded = LocalDate.now();
 		this.reservation = reservation;
