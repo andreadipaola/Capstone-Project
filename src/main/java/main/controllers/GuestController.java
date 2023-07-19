@@ -37,17 +37,20 @@ public class GuestController {
 	}
 
 	@PostMapping("")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Guest saveGuest(@RequestBody @Validated GuestPayload body) throws Exception {
 		return guestService.create(body);
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	public Guest getGuest(@PathVariable UUID id) throws Exception {
 		return guestService.findById(id);
 	}
 
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	public Guest updateGuest(@PathVariable UUID id, @RequestBody @Validated GuestPayload body) throws Exception {
 //		if (gestId == null) {
 //			throw new IllegalArgumentException("L'ID dell' ospite non può essere nullo");
@@ -56,6 +59,7 @@ public class GuestController {
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteGuest(@PathVariable UUID id) throws Exception {
 		guestService.findByIdAndDelete(id);

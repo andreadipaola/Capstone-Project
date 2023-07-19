@@ -29,15 +29,15 @@ public class SecurityConfig {
 		http.csrf(c -> c.disable());
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
-		http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/guests/**").hasAuthority("GUEST"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/guests/**").hasAuthority("MANAGER"));
 		http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/guests/**").authenticated());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/hotels/**").hasAuthority("MANAGER"));
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/invoices/**").hasAuthority("MANAGER"));
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/payments/**").hasAuthority("MANAGER"));
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/reservations/**").hasAuthority("GUEST"));
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/rooms/**").hasAuthority("GUEST"));
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/roomTypes/**").hasAuthority("GUEST"));
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").hasAuthority("GUEST"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/reservations/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/rooms/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/roomTypes/**").hasAuthority("MANAGER"));
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").hasAuthority("MANAGER"));
 		http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

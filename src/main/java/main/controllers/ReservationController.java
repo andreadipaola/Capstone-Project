@@ -1,9 +1,12 @@
 package main.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.entities.Reservation;
 import main.payloads.ReservationPayload;
+import main.responses.ReservationResponse;
 import main.services.ReservationService;
 
 @RestController
@@ -28,32 +32,60 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 
+//	@GetMapping("")
+//	@PreAuthorize("hasAuthority('MANAGER')")
+//	public Page<Reservation> getAllReservations(@RequestParam(defaultValue = "0") int page,
+//			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "arrivalDate") String sortBy)
+//			throws Exception {
+//		return reservationService.find(page, size, sortBy);
+//	}
+
 	@GetMapping("")
-	@PreAuthorize("hasAuthority('GUEST')")
-	public Page<Reservation> getAllReservations(@RequestParam(defaultValue = "0") int page,
+	@PreAuthorize("hasAuthority('MANAGER')")
+	public Page<ReservationResponse> getAllReservations(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "arrivalDate") String sortBy)
 			throws Exception {
-		return reservationService.find(page, size, sortBy);
+		Page<Reservation> reservationPage = reservationService.find(page, size, sortBy);
+		List<Reservation> reservations = reservationPage.getContent();
+
+		List<ReservationResponse> responseList = new ArrayList<>();
+		for (Reservation reservation : reservations) {
+			ReservationResponse response = new ReservationResponse();
+			response.setReservationId(reservation.getReservationId());
+			response.setArrivalDate(reservation.getArrivalDate());
+			response.setDepartureDate(reservation.getDepartureDate());
+			response.setBookingStatus(reservation.getBookingStatus());
+			response.setGuest(reservation.getGuest());
+			response.setRooms(reservation.getRooms());
+			response.setInvoice(reservation.getInvoice());
+			responseList.add(response);
+		}
+
+		return new PageImpl<>(responseList, reservationPage.getPageable(), reservationPage.getTotalElements());
 	}
 
 	@PostMapping("")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Reservation saveReservation(@RequestBody @Validated ReservationPayload body) throws Exception {
 		return reservationService.create(body);
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	public Reservation getReservation(@PathVariable UUID id) throws Exception {
 		return reservationService.findById(id);
 	}
 
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	public Reservation updateReservation(@PathVariable UUID id, @RequestBody @Validated ReservationPayload body)
 			throws Exception {
 		return reservationService.findByIdAndUpdate(id, body);
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('MANAGER')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteReservation(@PathVariable UUID id) throws Exception {
 		reservationService.findByIdAndDelete(id);

@@ -1,8 +1,6 @@
 package main.runners;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -52,10 +50,7 @@ public class ReservationRunner implements CommandLineRunner {
 					LocalDate arrivalDate = randomArrivalDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 					int randomDays = random.nextInt(10) + 1;
 					LocalDate departureDate = arrivalDate.plusDays(randomDays);
-					LocalTime checkinTime = LocalTime.of(14, 0, 0);
-					LocalDateTime checkin = arrivalDate.atTime(checkinTime);
-					LocalTime checkoutTime = LocalTime.of(10, 0, 0);
-					LocalDateTime checkout = departureDate.atTime(checkoutTime);
+
 					int randomGuestsIndex = random.nextInt(guestsFromDB.size());
 					Guest guest = guestsFromDB.get(randomGuestsIndex);
 
@@ -65,8 +60,8 @@ public class ReservationRunner implements CommandLineRunner {
 					// ASSEGNARE ALLE PRENOTAZIONI
 					// guestsFromDB.remove(randomGuestsIndex);
 
-					Reservation reservation = new Reservation(arrivalDate, departureDate, bookingStatus, checkin,
-							checkout, guest, null, null);
+					Reservation reservation = new Reservation(arrivalDate, departureDate, bookingStatus, guest, null,
+							null);
 
 					reservationRepository.save(reservation);
 

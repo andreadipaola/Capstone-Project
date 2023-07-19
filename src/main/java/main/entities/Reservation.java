@@ -1,7 +1,6 @@
 package main.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,8 +41,6 @@ public class Reservation {
 	@Column(name = "booking_status")
 	@Enumerated(EnumType.STRING)
 	private BookingStatus bookingStatus;
-	private LocalDateTime checkin;
-	private LocalDateTime checkout;
 
 	@ManyToOne
 	@JoinColumn(name = "guest_id")
@@ -58,13 +55,11 @@ public class Reservation {
 	@JsonManagedReference
 	private Invoice invoice;
 
-	public Reservation(LocalDate arrivalDate, LocalDate departureDate, BookingStatus bookingStatus,
-			LocalDateTime checkin, LocalDateTime checkout, Guest guest, List<Room> rooms, Invoice invoice) {
+	public Reservation(LocalDate arrivalDate, LocalDate departureDate, BookingStatus bookingStatus, Guest guest,
+			List<Room> rooms, Invoice invoice) {
 		this.arrivalDate = arrivalDate;
 		this.departureDate = departureDate;
 		this.bookingStatus = bookingStatus;
-		this.checkin = checkin;
-		this.checkout = checkout;
 		this.guest = guest;
 		this.rooms = rooms;
 		this.invoice = invoice;

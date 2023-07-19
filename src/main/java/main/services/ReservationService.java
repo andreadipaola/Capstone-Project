@@ -32,7 +32,7 @@ public class ReservationService {
 
 	public Reservation create(ReservationPayload body) {
 		Reservation reservation = new Reservation(body.getArrivalDate(), body.getDepartureDate(),
-				body.getBookingStatus(), body.getCheckin(), body.getCheckout(), null, null, null);
+				body.getBookingStatus(), null, null, null);
 		return reservationRepository.save(reservation);
 	}
 
@@ -47,8 +47,6 @@ public class ReservationService {
 		found.setReservationId(id);
 		found.setArrivalDate(body.getArrivalDate());
 		found.setDepartureDate(body.getDepartureDate());
-		found.setCheckin(body.getCheckin());
-		found.setCheckout(body.getCheckout());
 
 		return reservationRepository.save(found);
 	}

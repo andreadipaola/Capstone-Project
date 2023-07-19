@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ import main.services.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PasswordEncoder bcrypt;
 
 	@GetMapping("")
 	@PreAuthorize("hasAuthority('GUEST')")
@@ -37,8 +40,10 @@ public class UserController {
 	}
 
 	@PostMapping("")
+	@PreAuthorize("hasAuthority('GUEST')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User saveUser(@RequestBody @Validated UserPayload body) throws Exception {
+
 		return userService.create(body);
 	}
 
@@ -49,6 +54,8 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public User updateUser(@PathVariable UUID id, @RequestBody @Validated UserPayload body) throws Exception {
+		body.setPassword(bcrypt.encode(body.getPassword()));
+
 		return userService.findByIdAndUpdate(id, body);
 	}
 
