@@ -1,5 +1,6 @@
 package main.entities;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,21 +33,30 @@ import main.entities.enums.Role;
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
+	@Column(name = "user_id")
 	private UUID userId;
 	private String avatar;
+	@Column(name = "first_name")
 	private String firstName;
+	@Column(name = "last_name")
 	private String lastName;
 	private String email;
 	private String password;
+	private String phone;
+	@Column(name = "date_added")
+	private LocalDate dateAdded;
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	public User(String avatar, String firstName, String lastName, String email, String password, Role role) {
+	public User(String avatar, String firstName, String lastName, String email, String password, String phone,
+			LocalDate dateAdded, Role role) {
 		this.avatar = avatar;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.phone = phone;
+		this.dateAdded = LocalDate.now();
 		this.role = role;
 	}
 

@@ -1,6 +1,5 @@
 package main.runners;
 
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,9 +9,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import main.entities.Invoice;
-import main.entities.Reservation;
 import main.repositories.InvoiceRepository;
-import main.repositories.ReservationRepository;
 
 @Order(7)
 @Component
@@ -21,13 +18,13 @@ public class InvoiceRunner implements CommandLineRunner {
 	@Autowired
 	InvoiceRepository invoiceRepository;
 
-	@Autowired
-	ReservationRepository reservationRepository;
+//	@Autowired
+//	ReservationRepository reservationRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		Random random = new Random();
-		List<Reservation> reservationsfromDB = reservationRepository.findAll();
+//		List<Reservation> reservationsfromDB = reservationRepository.findAll();
 
 		if (invoiceRepository.count() == 0) {
 			for (int i = 0; i < 25; i++) {
@@ -35,11 +32,11 @@ public class InvoiceRunner implements CommandLineRunner {
 					double randomNumber = ThreadLocalRandom.current().nextDouble(70, 3000);
 					Double total = Math.round(randomNumber * 100.0) / 100.0;
 
-					int randomReservationsIndex = random.nextInt(reservationsfromDB.size());
-					Reservation reservation = reservationsfromDB.get(randomReservationsIndex);
-					reservationsfromDB.remove(randomReservationsIndex);
+//					int randomReservationsIndex = random.nextInt(reservationsfromDB.size());
+//					Reservation reservation = reservationsfromDB.get(randomReservationsIndex);
+//					reservationsfromDB.remove(randomReservationsIndex);
 
-					Invoice invoice = new Invoice(total, reservation, null);
+					Invoice invoice = new Invoice(total, null);
 					invoiceRepository.save(invoice);
 				} catch (Exception ex) {
 					System.out.println(ex);

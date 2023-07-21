@@ -108,7 +108,7 @@ public class AuthController {
 		String hashedPW = user.getPassword();
 
 		if (!bcrypt.matches(plainPW, hashedPW))
-			throw new UnauthorizedException("Credenziali non valide");
+			throw new UnauthorizedException("Password non valida");
 		String token = JWTTools.createToken(user);
 
 		return new ResponseEntity<>(new AuthenticationSuccessfullPayload(token), HttpStatus.OK);

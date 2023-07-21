@@ -37,14 +37,14 @@ public class UserService {
 					"ATTENZIONE!!! L'email con la quale stai cercando di registarti è già in uso da un altro utente");
 		});
 		User user = new User(body.getAvatar(), body.getFirstName(), body.getLastName(), body.getEmail(),
-				body.getPassword(), body.getRole());
+				body.getPassword(), body.getPhone(), body.getDateAdded(), body.getRole());
 
 		return userRepository.save(user);
 	}
 
 	public User findById(UUID id) throws NotFoundException {
 		return userRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! La struttura cercata non è stata trovata!"));
+				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! L'utente cercato non è stato trovato!"));
 	}
 
 	public User findByIdAndUpdate(UUID id, UserPayload body) throws NotFoundException {
@@ -55,6 +55,7 @@ public class UserService {
 		found.setFirstName(body.getFirstName());
 		found.setLastName(body.getLastName());
 		found.setEmail(body.getEmail());
+		found.setPhone(body.getPhone());
 		found.setPassword(body.getPassword());
 		found.setRole(body.getRole());
 

@@ -1,5 +1,7 @@
 package main.payloads;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +17,11 @@ public class UserPayload {
 	private String lastName;
 	@NotNull(message = "ATTENZIONE!!! Il campo Email è obbligatorio")
 	private String email;
-//	@NotNull(message = "ATTENZIONE!!! Il campo Password è obbligatorio")
+	@NotNull(message = "ATTENZIONE!!! Il campo Password è obbligatorio")
 	private String password;
+//	@NotNull(message = "ATTENZIONE!!! Il campo Phone è obbligatorio")
+	private String phone;
+	private LocalDate dateAdded;
+	@NotNull(message = "ATTENZIONE!!! Il campo Role è obbligatorio")
 	private Role role;
 }

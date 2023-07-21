@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import main.entities.Guest;
-import main.entities.Invoice;
 import main.entities.Room;
 import main.entities.enums.BookingStatus;
 
@@ -22,5 +21,5 @@ public class ReservationResponse {
 	private BookingStatus bookingStatus;
 	private Guest guest;
 	private List<Room> rooms;
-	private Invoice invoice;
+//	private Invoice invoice;
 }

@@ -2,7 +2,6 @@ package main.entities;
 
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -10,7 +9,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -29,18 +27,18 @@ public class Invoice {
 	private UUID invoiceId;
 	private double total;
 
-	@OneToOne
-	@JoinColumn(name = "reservarion_id")
-	@JsonBackReference
-	private Reservation reservation;
+//	@OneToOne
+//	@JoinColumn(name = "reservarion_id")
+//	@JsonBackReference
+//	private Reservation reservation;
 
 	@OneToOne(mappedBy = "invoice", cascade = CascadeType.REMOVE)
 	@JsonManagedReference
 	private Payment payment;
 
-	public Invoice(double total, Reservation reservation, Payment payment) {
+	public Invoice(double total, Payment payment) {
 		this.total = total;
-		this.reservation = reservation;
+//		this.reservation = reservation;
 		this.payment = payment;
 	}
 

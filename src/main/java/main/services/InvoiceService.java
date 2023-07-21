@@ -31,7 +31,7 @@ public class InvoiceService {
 	}
 
 	public Invoice create(InvoicePayload body) {
-		Invoice invoice = new Invoice(body.getTotal(), null, null);
+		Invoice invoice = new Invoice(body.getTotal(), null);
 		return invoiceRepository.save(invoice);
 	}
 

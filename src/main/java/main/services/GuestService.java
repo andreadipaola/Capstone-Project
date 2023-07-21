@@ -31,11 +31,13 @@ public class GuestService {
 	}
 
 	public Guest create(GuestPayload body) {
-		Guest guest = new Guest(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
-				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
-				body.getCityOfResidence(), body.getCitizenship(), body.getDocumentType(), body.getDocumentNumber(),
-				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
-				body.getCreditCard(), body.getReasonOfTheTrip(), null);
+//		Guest guest = new Guest(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
+//				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
+//				body.getCityOfResidence(), body.getCitizenship(), body.getDocumentType(), body.getDocumentNumber(),
+//				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
+//				body.getCreditCard(), body.getReasonOfTheTrip(), null);
+		Guest guest = new Guest(body.getFirstName(), body.getLastName(), body.getCitizenship(), body.getEmail(),
+				body.getPhone(), body.getNote());
 		return guestRepository.save(guest);
 	}
 
@@ -48,25 +50,25 @@ public class GuestService {
 		Guest found = this.findById(id);
 
 		found.setGuestId(id);
-		found.setGender(body.getGender());
+//		found.setGender(body.getGender());
 		found.setFirstName(body.getFirstName());
 		found.setLastName(body.getLastName());
-		found.setLanguage(body.getLanguage());
-		found.setDateOfBirth(body.getDateOfBirth());
-		found.setCountryOfBirth(body.getCountryOfBirth());
-		found.setCityOfBirth(body.getCityOfBirth());
-		found.setCountryOfResidence(body.getCountryOfResidence());
-		found.setCityOfResidence(body.getCityOfResidence());
+//		found.setLanguage(body.getLanguage());
+//		found.setDateOfBirth(body.getDateOfBirth());
+//		found.setCountryOfBirth(body.getCountryOfBirth());
+//		found.setCityOfBirth(body.getCityOfBirth());
+//		found.setCountryOfResidence(body.getCountryOfResidence());
+//		found.setCityOfResidence(body.getCityOfResidence());
 		found.setCitizenship(body.getCitizenship());
-		found.setDocumentType(body.getDocumentType());
-		found.setDocumentNumber(body.getDocumentNumber());
+//		found.setDocumentType(body.getDocumentType());
+//		found.setDocumentNumber(body.getDocumentNumber());
 		found.setEmail(body.getEmail());
-		found.setPassword(body.getPassword());
+//		found.setPassword(body.getPassword());
 		found.setPhone(body.getPhone());
 		found.setNote(body.getNote());
-		found.setFoodIntolerance(body.getFoodIntolerance());
-		found.setCreditCard(body.getCreditCard());
-		found.setReasonOfTheTrip(body.getReasonOfTheTrip());
+//		found.setFoodIntolerance(body.getFoodIntolerance());
+//		found.setCreditCard(body.getCreditCard());
+//		found.setReasonOfTheTrip(body.getReasonOfTheTrip());
 
 		return guestRepository.save(found);
 	}

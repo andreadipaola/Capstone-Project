@@ -60,8 +60,7 @@ public class ReservationRunner implements CommandLineRunner {
 					// ASSEGNARE ALLE PRENOTAZIONI
 					// guestsFromDB.remove(randomGuestsIndex);
 
-					Reservation reservation = new Reservation(arrivalDate, departureDate, bookingStatus, guest, null,
-							null);
+					Reservation reservation = new Reservation(arrivalDate, departureDate, bookingStatus, guest, null);
 
 					reservationRepository.save(reservation);
 
