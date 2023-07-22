@@ -64,30 +64,30 @@ public class ReservationController {
 		return new PageImpl<>(responseList, reservationPage.getPageable(), reservationPage.getTotalElements());
 	}
 
-//	@PostMapping("")
-//	@PreAuthorize("hasAuthority('MANAGER')")
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public Reservation saveReservation(@RequestBody @Validated ReservationPayload body) throws Exception {
-//		return reservationService.create(body);
-//	}
-//	
 	@PostMapping("")
 	@PreAuthorize("hasAuthority('MANAGER')")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ReservationResponse saveReservation(@RequestBody @Validated ReservationPayload body) throws Exception {
-		Reservation reservation = reservationService.create(body);
-
-		ReservationResponse response = new ReservationResponse();
-		response.setReservationId(reservation.getReservationId());
-		response.setArrivalDate(reservation.getArrivalDate());
-		response.setDepartureDate(reservation.getDepartureDate());
-		response.setBookingStatus(reservation.getBookingStatus());
-		response.setGuest(reservation.getGuest());
-		response.setRooms(reservation.getRooms());
-//		response.setInvoice(reservation.getInvoice());
-
-		return response;
+	public Reservation saveReservation(@RequestBody @Validated ReservationPayload body) throws Exception {
+		return reservationService.create(body);
 	}
+//	
+//	@PostMapping("")
+//	@PreAuthorize("hasAuthority('MANAGER')")
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public ReservationResponse saveReservation(@RequestBody @Validated ReservationPayload body) throws Exception {
+//		Reservation reservation = reservationService.create(body);
+//
+//		ReservationResponse response = new ReservationResponse();
+//		response.setReservationId(reservation.getReservationId());
+//		response.setArrivalDate(reservation.getArrivalDate());
+//		response.setDepartureDate(reservation.getDepartureDate());
+//		response.setBookingStatus(reservation.getBookingStatus());
+//		response.setGuest(reservation.getGuest());
+//		response.setRooms(reservation.getRooms());
+////		response.setInvoice(reservation.getInvoice());
+//
+//		return response;
+//	}
 
 //	@GetMapping("/{id}")
 //	@PreAuthorize("hasAuthority('MANAGER')")
@@ -111,27 +111,6 @@ public class ReservationController {
 
 		return response;
 	}
-
-//	@PutMapping("/{id}")
-//	@PreAuthorize("hasAuthority('MANAGER')")
-//	public Reservation updateReservation(@PathVariable UUID id, @RequestBody @Validated ReservationPayload body)
-//			throws Exception {
-//		return reservationService.findByIdAndUpdate(id, body);
-//	}
-
-//	@PutMapping("/{id}")
-//	@PreAuthorize("hasAuthority('MANAGER')")
-//	public Reservation updateReservation(@PathVariable UUID id, @RequestBody @Validated ReservationPayload body)
-//			throws Exception {
-//		Reservation reservation = reservationService.findById(id);
-//		reservation.setArrivalDate(body.getArrivalDate());
-//		reservation.setDepartureDate(body.getDepartureDate());
-//		reservation.setBookingStatus(body.getBookingStatus());
-//		reservation.setGuest(body.getGuest());
-//		// ... aggiorna gli altri campi necessari
-//
-//		return reservationService.updateReservation(reservation);
-//	}
 
 	@PutMapping("/{id}")
 	@PreAuthorize("hasAuthority('MANAGER')")

@@ -44,24 +44,83 @@ public class ReservationService {
 				.orElseThrow(() -> new NotFoundException("ATTENZIONE!!! La prenotazione cercata non è stata trovata!"));
 	}
 
+//	public Reservation findByIdAndUpdate(UUID id, ReservationPayload body) throws NotFoundException {
+//		Reservation found = this.findById(id);
+//
+//		found.setReservationId(id);
+//		found.setArrivalDate(body.getArrivalDate());
+//		found.setDepartureDate(body.getDepartureDate());
+//		found.setBookingStatus(body.getBookingStatus());
+//
+//		if (body.getGuest() != null) {
+//			Guest guest = found.getGuest();
+//			guest.setFirstName(body.getGuest().getFirstName());
+//			guest.setLastName(body.getGuest().getLastName());
+//			guest.setCitizenship(body.getGuest().getCitizenship());
+//			guest.setEmail(body.getGuest().getEmail());
+//			guest.setPhone(body.getGuest().getPhone());
+//			guest.setNote(body.getGuest().getNote());
+//		}
+//		
+//
+//
+//		return reservationRepository.save(found);
+//	}
+
 	public Reservation findByIdAndUpdate(UUID id, ReservationPayload body) throws NotFoundException {
 		Reservation found = this.findById(id);
 
 		found.setReservationId(id);
-		found.setArrivalDate(body.getArrivalDate());
-		found.setDepartureDate(body.getDepartureDate());
-		found.setBookingStatus(body.getBookingStatus());
 
-		Guest guest = found.getGuest();
-		guest.setFirstName(body.getGuest().getFirstName());
-		guest.setLastName(body.getGuest().getLastName());
-		guest.setCitizenship(body.getGuest().getCitizenship());
-		guest.setEmail(body.getGuest().getEmail());
-		guest.setPhone(body.getGuest().getPhone());
-		guest.setNote(body.getGuest().getNote());
+		// Copia solo i campi forniti da body a found
+		if (body.getArrivalDate() != null) {
+			found.setArrivalDate(body.getArrivalDate());
+		}
+		if (body.getDepartureDate() != null) {
+			found.setDepartureDate(body.getDepartureDate());
+		}
+		if (body.getBookingStatus() != null) {
+			found.setBookingStatus(body.getBookingStatus());
+		}
 
-//		Invoice invoice = found.getInvoice();
-//		invoice.setTotal(body.getInvoice().getTotal());
+		// Gestisci i campi Guest
+		if (body.getGuest() != null) {
+			Guest guest = found.getGuest();
+			Guest bodyGuest = body.getGuest();
+
+			if (bodyGuest.getFirstName() != null) {
+				guest.setFirstName(bodyGuest.getFirstName());
+			}
+			if (bodyGuest.getLastName() != null) {
+				guest.setLastName(bodyGuest.getLastName());
+			}
+			if (bodyGuest.getCitizenship() != null) {
+				guest.setCitizenship(bodyGuest.getCitizenship());
+			}
+			if (bodyGuest.getEmail() != null) {
+				guest.setEmail(bodyGuest.getEmail());
+			}
+			if (bodyGuest.getPhone() != null) {
+				guest.setPhone(bodyGuest.getPhone());
+			}
+			if (bodyGuest.getNote() != null) {
+				guest.setNote(bodyGuest.getNote());
+			}
+			// Puoi continuare con gli altri campi Guest se ce ne sono altri
+		}
+
+//	    // Gestisci i campi Invoice
+//	    if (body.getInvoice() != null) {
+//	        Invoice invoice = found.getInvoice();
+//	        Invoice bodyInvoice = body.getInvoice();
+//
+//	        if (bodyInvoice.getTotal() != null) {
+//	            invoice.setTotal(bodyInvoice.getTotal());
+//	        }
+//	        // Puoi continuare con gli altri campi Invoice se ce ne sono altri
+//	    }
+
+		// Resto del codice...
 
 		return reservationRepository.save(found);
 	}
