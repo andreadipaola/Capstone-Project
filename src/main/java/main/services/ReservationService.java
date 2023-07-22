@@ -109,6 +109,8 @@ public class ReservationService {
 			// Puoi continuare con gli altri campi Guest se ce ne sono altri
 		}
 
+		// test
+
 //	    // Gestisci i campi Invoice
 //	    if (body.getInvoice() != null) {
 //	        Invoice invoice = found.getInvoice();
