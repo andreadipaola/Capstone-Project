@@ -31,7 +31,7 @@ public class GuestController {
 	@GetMapping("")
 	@PreAuthorize("hasAuthority('MANAGER')")
 	public Page<Guest> getAllGuests(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "lastName") String sortBy)
+			@RequestParam(defaultValue = "50") int size, @RequestParam(defaultValue = "lastName") String sortBy)
 			throws Exception {
 		return guestService.find(page, size, sortBy);
 	}

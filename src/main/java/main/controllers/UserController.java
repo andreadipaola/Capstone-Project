@@ -34,7 +34,7 @@ public class UserController {
 	@GetMapping("")
 	@PreAuthorize("hasAuthority('GUEST')")
 	public Page<User> getAllUsers(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "lastName") String sortBy)
+			@RequestParam(defaultValue = "50") int size, @RequestParam(defaultValue = "lastName") String sortBy)
 			throws Exception {
 		return userService.find(page, size, sortBy);
 	}

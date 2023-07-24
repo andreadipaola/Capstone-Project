@@ -43,7 +43,7 @@ public class ReservationController {
 	@GetMapping("")
 	@PreAuthorize("hasAuthority('MANAGER')")
 	public Page<ReservationResponse> getAllReservations(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "bookingStatus") String sortBy)
+			@RequestParam(defaultValue = "50") int size, @RequestParam(defaultValue = "bookingStatus") String sortBy)
 			throws Exception {
 		Page<Reservation> reservationPage = reservationService.find(page, size, sortBy);
 		List<Reservation> reservations = reservationPage.getContent();
