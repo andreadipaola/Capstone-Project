@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import main.entities.Guest;
+import main.exceptions.BadRequestException;
 import main.exceptions.NotFoundException;
 import main.payloads.GuestPayload;
 import main.repositories.GuestRepository;
@@ -31,11 +32,9 @@ public class GuestService {
 	}
 
 	public Guest create(GuestPayload body) {
-//		Guest guest = new Guest(body.getGender(), body.getFirstName(), body.getLastName(), body.getLanguage(),
-//				body.getDateOfBirth(), body.getCountryOfBirth(), body.getCityOfBirth(), body.getCountryOfResidence(),
-//				body.getCityOfResidence(), body.getCitizenship(), body.getDocumentType(), body.getDocumentNumber(),
-//				body.getEmail(), body.getPassword(), body.getPhone(), body.getNote(), body.getFoodIntolerance(),
-//				body.getCreditCard(), body.getReasonOfTheTrip(), null);
+		guestRepository.findByEmail(body.getEmail()).ifPresent(guest -> {
+			throw new BadRequestException("ATTENZIONE!!! L'email è già in uso da un altro ospite");
+		});
 		Guest guest = new Guest(body.getFirstName(), body.getLastName(), body.getCitizenship(), body.getEmail(),
 				body.getPhone(), body.getNote());
 		return guestRepository.save(guest);

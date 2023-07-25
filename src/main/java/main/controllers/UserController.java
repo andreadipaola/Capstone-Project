@@ -43,6 +43,7 @@ public class UserController {
 	@PreAuthorize("hasAuthority('GUEST')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User saveUser(@RequestBody @Validated UserPayload body) throws Exception {
+		body.setPassword(bcrypt.encode(body.getPassword()));
 
 		return userService.create(body);
 	}
